@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  font-family: Roboto, sans-serif;
+}
+
+.spacer {
+  min-height: 150vh;
+}
+
+:host /deep/ .foo {
+  transition: all .35s ease-in-out;
+  width: 150px;
+}
+
+@media (min-width: 768px) {
+  :host /deep/ .foo {
+    width: 500px;
+  }
+}
+
+:host /deep/ .sn-image-not-loaded .foo {
+  filter: blur(20px);
+}
+
+:host /deep/ .sn-image-loaded .foo {
+  filter: blur(0px);
+}

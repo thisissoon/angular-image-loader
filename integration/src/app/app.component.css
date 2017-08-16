@@ -1,0 +1,58 @@
+:host {
+  display: block;
+  font-family: Roboto, sans-serif;
+  padding-top: 100px;
+}
+
+.foo {
+  align-items: center;
+  background-color: #563d7c;
+  color: #ffffff;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  text-align: center;
+  top: 0;
+  transition: all .35s ease-in-out;
+}
+
+.foo .down,
+.foo .up {
+  display: none;
+}
+
+.foo.sn-scrolling-down .down,
+.foo.sn-scrolling-up .up {
+  display: block;
+}
+
+.foo.sn-minimise {
+  background-color: #007bff;
+  height: 50px;
+}
+
+.bar {
+  align-items: center;
+  background-color: #d4edda;
+  color: #ffffff;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  text-align: center;
+  transition: all .35s ease-in-out;
+}
+
+.bar.sn-affix {
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 9999;
+}
+
+.spacer {
+  height: 150vh;
+}
