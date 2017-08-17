@@ -4,6 +4,8 @@
 
 A simple progressive/responsive/lazy loading image library for [Angular (2/4+)][angular] that detects browser size and loads the appropriate image only when the element is in view. This package requires [angular-inviewport][angular-inviewport]
 
+<img src="https://raw.githubusercontent.com/thisissoon/angular-image-loader/master/src/demo/example.gif" alt="example">
+
 This is a simple library for [Angular][angular], implemented in the [Angular Package Format v4.0](https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/edit#heading=h.k0mh3o8u5hx).
 
 
@@ -24,18 +26,24 @@ export class AppModule { }
 ```
 
 
-## Examples
+## Example
+
+a working example can be found inside [/src/demo](https://github.com/thisissoon/angular-image-loader/tree/master/src/demo) folder
+
+### `app.component.html`
 
 ```html
 <sn-image-loader [image]="image" [sizes]="sizes" imgClass="foo" alt="lorem ipsum"></sn-image-loader>
 ```
 
+### `app.component.ts`
+
 ```ts
 export class AppComponent {
   sizes: Breakpoint[] = [
-    { size: Size.XS, width: 0},
-    { size: Size.MD, width: 768},
-    { size: Size.LG, width: 992},
+    { size: 'xs', width: 0},
+    { size: 'md', width: 768},
+    { size: 'lg', width: 992},
   ];
 
   image: ResponsiveImage = {
@@ -57,16 +65,18 @@ export class AppComponent {
 }
 ```
 
+### `app.component.css`
+
 ```css
 .foo {
   transition: all .35s ease-in-out;
 }
 
-.sn-image-not-loaded .foo {
+.sn-image-not-loaded /deep/ .foo {
   filter: blur(20px);
 }
 
-.sn-image-loaded .foo {
+.sn-image-loaded /deep/ .foo {
   filter: blur(0px);
 }
 ```
