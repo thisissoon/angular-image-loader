@@ -2,14 +2,14 @@
 [![Build Status][travis-badge]][travis-badge-url]
 [![Coverage Status][coveralls-badge]][coveralls-badge-url]
 
-A simple progressive/responsive/lazy loading image library for [Angular (2/4+)][angular] with no other dependencies that detects browser size and loads the appropriate image on when the element is in view
+A simple progressive/responsive/lazy loading image library for [Angular (2/4+)][angular] that detects browser size and loads the appropriate image only when the element is in view. This package requires [angular-inviewport][angular-inviewport]
 
 This is a simple library for [Angular][angular], implemented in the [Angular Package Format v4.0](https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/edit#heading=h.k0mh3o8u5hx).
 
 
 ## Install
 
-`npm i @thisissoon/angular-image-loader --save`
+`npm i @thisissoon/{angular-image-loader,angular-inviewport} --save`
 
 `app.module.ts`
 ```ts
@@ -77,3 +77,4 @@ export class AppComponent {
 [coveralls-badge]: https://coveralls.io/repos/github/thisissoon/angular-image-loader/badge.svg?branch=master
 [coveralls-badge-url]: https://coveralls.io/github/thisissoon/angular-image-loader?branch=master
 [angular]: https://angular.io/
+[angular-inviewport]: https://github.com/thisissoon/angular-inviewport
