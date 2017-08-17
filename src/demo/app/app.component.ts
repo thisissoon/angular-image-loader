@@ -8,9 +8,9 @@ import { ResponsiveImage, Breakpoint, Size } from 'angular-image-loader';
 })
 export class AppComponent {
   sizes: Breakpoint[] = [
-    { size: Size.XS, width: 0},
-    { size: Size.MD, width: 768},
-    { size: Size.LG, width: 992},
+    { size: 'xs', width: 0},
+    { size: 'md', width: 768},
+    { size: 'lg', width: 992},
   ];
 
   image: ResponsiveImage = {

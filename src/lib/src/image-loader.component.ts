@@ -92,13 +92,6 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   public size: Size = 'xs';
   /**
-   * Retina value for image to display
-   *
-   * @type {Retina}
-   * @memberof ImageLoaderComponent
-   */
-  public retina: Retina = '@1x';
-  /**
    * Set of images for different viewports
    *
    * @type {ResponsiveImage}
@@ -126,7 +119,7 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * @type {Subject<void>}
    * @memberof ImageLoaderComponent
    */
-  private ngUnsubscribe$ = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
   /**
    * Reference to dummy image element
    *
@@ -179,7 +172,6 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
     const dummyImg: HTMLElement = this.dummyImg.nativeElement;
     if ('srcset' in dummyImg) {
       this.supportsSrcSet = true;
-      this.retina = '@2x';
     }
     this.width$
       .takeUntil(this.ngUnsubscribe$)
@@ -245,7 +237,7 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
       const imageRetina = this.image[this.size]['@2x'];
       this.supportsSrcSet ?
         this.preloadSrcset = `${imageNormal} 1x, ${imageRetina} 2x` :
-        this.preloadSrc = this.preloadSrc;
+        this.preloadSrc = `${imageNormal}`;
     }
   }
   /**
