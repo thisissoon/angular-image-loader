@@ -1,6 +1,6 @@
 {
   "name": "@thisissoon/angular-image-loader",
-  "version": "1.0.1",
+  "version": "1.1.0-rc.0",
   "description": "A simple progressive/responsive/lazy loading image library for Angular (2/4+) that detects browser size and loads the appropriate image only when the element is in view. This package requires angular-inviewport",
   "keywords": [
     "angular",
@@ -83,6 +83,7 @@
     "ng-packagr": "^1.6.0",
     "protractor": "~5.1.2",
     "rxjs": "^5.5.2",
+    "standard-version": "^4.2.0",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
     "typescript": "~2.4.2",
