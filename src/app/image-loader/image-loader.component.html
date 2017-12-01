@@ -1,0 +1,17 @@
+<img
+  *ngIf="image"
+  [src]="src"
+  [srcset]="srcset"
+  [alt]="alt"
+  [class]="imgClass"
+  inViewport
+  (inViewportChange)="onInViewportChange($event)"
+  [debounce]="0">
+
+<img
+  #dummyImg
+  class="sn-img-dummy"
+  [srcset]="preloadSrcset"
+  [src]="preloadSrc"
+  (load)="onImagePreload()"
+  alt="">
