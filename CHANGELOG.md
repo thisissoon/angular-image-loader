@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/thisissoon/angular-image-loader/compare/v1.1.0...v1.1.1) (2017-12-04)
+
+
+### Bug Fixes
+
+* **build:** generate correct metadata needed for ng-language-service ([f2446a5](https://github.com/thisissoon/angular-image-loader/commit/f2446a5))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/thisissoon/angular-image-loader/compare/v1.1.0-rc.0...v1.1.0) (2017-12-01)
 
