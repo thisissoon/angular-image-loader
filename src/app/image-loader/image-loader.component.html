@@ -6,7 +6,8 @@
   [class]="imgClass"
   inViewport
   (inViewportChange)="onInViewportChange($event)"
-  [debounce]="0">
+  [debounce]="0"
+  (load)="onImageLoad(image)">
 
 <img
   #dummyImg

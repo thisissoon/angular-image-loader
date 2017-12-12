@@ -1,4 +1,16 @@
-import { Component, Input, OnInit, HostBinding, HostListener, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  HostBinding,
+  HostListener,
+  AfterViewInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/debounceTime';
@@ -135,6 +147,15 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   public supportsSrcSet = false;
   /**
+   * Output for image loaded event.
+   * Event payload is object representation of loaded image.
+   *
+   * @type {EventEmitter}
+   * @memberof ImageLoaderComponent
+   */
+  @Output()
+  public imageLoaded: EventEmitter<ResponsiveImage> = new EventEmitter<ResponsiveImage>();
+  /**
    * If true means the image has not been loaded yet and
    * the placeholder image is currently displayed
    *
@@ -254,6 +275,14 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
       this.src = this.preloadSrc;
     this.preloadSrc = '';
     this.loaded = true;
+  }
+  /**
+   * When the main `img` element has loaded
+   *
+   * @memberof ImageLoaderComponent
+   */
+  public onImageLoad(image: ResponsiveImage): void {
+    this.imageLoaded.emit(image);
   }
   /**
    * Trigger `ngUnsubscribe` complete on

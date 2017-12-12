@@ -6,13 +6,11 @@ export class AppPage {
   }
 
   scrollTo(x: number = 0, y: number = 0) {
-    browser.executeScript(`window.scrollTo(${x}, ${y})`);
-    browser.sleep(200);
+    return browser.executeScript(`window.scrollTo(${x}, ${y})`);
   }
 
   setWindowSize(x: number, y: number) {
-    browser.driver.manage().window().setSize(x, y);
-    browser.sleep(200);
+    return browser.driver.manage().window().setSize(x, y);
   }
 
   getImageLoaderComp() {
@@ -21,5 +19,13 @@ export class AppPage {
 
   getImageElement() {
     return element(by.css('sn-image-loader .foo'));
+  }
+
+  getLoadedImageElement() {
+    return element(by.css('.sn-image-loaded')).isPresent();
+  }
+
+  getCountElement() {
+    return element(by.css('.count'));
   }
 }

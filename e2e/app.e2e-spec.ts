@@ -25,11 +25,16 @@ describe('ImageLoader Lib E2E Tests', function () {
       expect(imageLoaderCompClass).toContain('sn-image-not-loaded');
       expect(imgSrc).toEqual('http://via.placeholder.com/35x15?text=placeholder');
 
-      page.scrollTo(0, 580 * 1.5);
+      page.scrollTo(0, 580 * 1.5)
+        .then(() => {
+          browser.wait(() => page.getLoadedImageElement());
+        });
+
       imageLoaderCompClass = page.getImageLoaderComp().getAttribute('class');
       imgSrc = page.getImageElement().getAttribute('srcset');
       expect(imageLoaderCompClass).toContain('sn-image-loaded');
       expect(imgSrc).toEqual('http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x');
+
     });
   });
 
@@ -37,22 +42,69 @@ describe('ImageLoader Lib E2E Tests', function () {
     beforeEach(() => page.setWindowSize(300, 580));
 
     it('should load correct image for device size', () => {
-      page.scrollTo(0, 580 * 1.5);
+
+      page.scrollTo(0, 580 * 1.5)
+        .then(() => {
+          browser.wait(() => page.getLoadedImageElement());
+        });
 
       const imageLoaderCompClass = page.getImageLoaderComp().getAttribute('class');
       let imgSrc = page.getImageElement().getAttribute('srcset');
-
       expect(imageLoaderCompClass).toContain('sn-image-loaded');
       expect(imgSrc).toEqual('http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x');
 
-      page.setWindowSize(768, 580);
+      page.setWindowSize(768, 580)
+        .then(() => {
+          browser.wait(() => page.getLoadedImageElement());
+        });
+
       imgSrc = page.getImageElement().getAttribute('srcset');
       expect(imgSrc).toEqual('http://via.placeholder.com/350x250?text=md+1x 1x, http://via.placeholder.com/700x500?text=md+2x 2x');
 
-      page.setWindowSize(1024, 580);
+      page.setWindowSize(1024, 580)
+        .then(() => {
+          browser.wait(() => page.getLoadedImageElement());
+        });
+
       imgSrc = page.getImageElement().getAttribute('srcset');
       expect(imgSrc).toEqual('http://via.placeholder.com/700x400?text=lg+1x 1x, http://via.placeholder.com/1400x800?text=lg+2x 2x');
     });
+
   });
+
+  describe('iamge loaded', () => {
+    beforeEach(() => page.setWindowSize(300, 580));
+
+    it('should fire an event on placeholder image load', () => {
+      expect(page.getCountElement().getText()).toEqual('1');
+    });
+
+    it('should update image loaded event count on when image in viewport', () => {
+      page.scrollTo(0, 580 * 1.5)
+        .then(() => {
+          browser.wait(() => page.getLoadedImageElement());
+        });
+      expect(page.getCountElement().getText()).toEqual('2');
+    });
+
+    it('should update image loaded event count on image load on window resize when image in viewport', () => {
+
+      page.scrollTo(0, 580 * 1.5)
+        .then(() => page.setWindowSize(768, 580))
+        .then(() => {
+          browser.wait(() => page.getLoadedImageElement());
+        });
+      expect(page.getCountElement().getText()).toEqual('3');
+
+      page.setWindowSize(1024, 580)
+        .then(() => {
+          browser.wait(() => page.getLoadedImageElement());
+        });
+      expect(page.getCountElement().getText()).toEqual('4');
+
+    });
+
+  });
+
 });
 

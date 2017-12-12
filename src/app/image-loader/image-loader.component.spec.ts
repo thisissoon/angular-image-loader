@@ -1,5 +1,6 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 import { ImageLoaderComponent } from './image-loader.component';
 import { Breakpoint, ResponsiveImage } from './shared/image.model';
@@ -143,6 +144,14 @@ describe('ImageLoaderComponent', () => {
     component.onImagePreload();
     expect(component.srcset)
       .toEqual('http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x');
+  });
+
+  it('should emit an event on image load', () => {
+    const spy = spyOn(component.imageLoaded, 'emit');
+    const imageElement = fixture.debugElement.query(By.css('img'));
+    imageElement.triggerEventHandler('load', null);
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith(image);
   });
 
   it('should complete observable', () => {

@@ -29,4 +29,22 @@ export class AppComponent {
       '@2x': 'http://via.placeholder.com/1400x800?text=lg+2x'
     }
   };
+
+  /**
+   * Incremented on each image load event.
+   *
+   * @type {number}
+   * @memberof ImageLoaderComponent
+   */
+  imageLoadedEventCount = 0;
+
+  /**
+   * Increments event count on each image loaded event.
+   * Counter displayed in component template.
+   *
+   * @memberof ImageLoaderComponent
+   */
+  public onImageLoad(event) {
+    this.imageLoadedEventCount++;
+  }
 }

@@ -1,8 +1,10 @@
 <h1>Scroll down ↓</h1>
 <div class="spacer"></div>
+<h3>imageLoaded event count: <span class="count">{{ imageLoadedEventCount }}</span></h3>
 <sn-image-loader
   [image]="image"
   [sizes]="sizes"
   imgClass="foo"
+  (imageLoaded)="onImageLoad($event)"
 ></sn-image-loader>
 <div class="spacer"></div>
