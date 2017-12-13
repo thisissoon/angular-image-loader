@@ -25,6 +25,10 @@ export class AppPage {
     return element(by.css('.sn-image-loaded')).isPresent();
   }
 
+  getLoadedImageElementBySrcSet(srcSet) {
+    return element(by.css(`img[srcSet="${srcSet}"]`)).isPresent();
+  }
+
   getplaceholderBooleanElement() {
     return element(by.css('.placeholder-boolean'));
   }

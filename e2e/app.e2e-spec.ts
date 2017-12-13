@@ -78,7 +78,9 @@ describe('ImageLoader Lib E2E Tests', function () {
 
       page.setWindowSize(768, 580)
         .then(() => {
-          browser.wait(() => page.getLoadedImageElement());
+          browser.wait(() => page.getLoadedImageElementBySrcSet(
+            'http://via.placeholder.com/350x250?text=md+1x 1x, http://via.placeholder.com/700x500?text=md+2x 2x'
+          ), 5000);
         });
 
       imgSrc = page.getImageElement().getAttribute('srcset');
@@ -86,7 +88,9 @@ describe('ImageLoader Lib E2E Tests', function () {
 
       page.setWindowSize(1024, 580)
         .then(() => {
-          browser.wait(() => page.getLoadedImageElement());
+          browser.wait(() => page.getLoadedImageElementBySrcSet(
+            'http://via.placeholder.com/700x400?text=lg+1x 1x, http://via.placeholder.com/1400x800?text=lg+2x 2x'
+          ), 5000);
         });
 
       imgSrc = page.getImageElement().getAttribute('srcset');
@@ -105,13 +109,17 @@ describe('ImageLoader Lib E2E Tests', function () {
 
       page.setWindowSize(768, 580)
         .then(() => {
-          browser.wait(() => page.getLoadedImageElement());
+          browser.wait(() => page.getLoadedImageElementBySrcSet(
+            'http://via.placeholder.com/350x250?text=md+1x 1x, http://via.placeholder.com/700x500?text=md+2x 2x'
+          ), 5000);
         });
       expect(page.getFullResCountElement().getText()).toEqual('2');
 
       page.setWindowSize(1024, 580)
         .then(() => {
-          browser.wait(() => page.getLoadedImageElement());
+          browser.wait(() => page.getLoadedImageElementBySrcSet(
+            'http://via.placeholder.com/700x400?text=lg+1x 1x, http://via.placeholder.com/1400x800?text=lg+2x 2x'
+          ), 5000);
         });
       expect(page.getFullResCountElement().getText()).toEqual('3');
     });
