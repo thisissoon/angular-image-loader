@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ResponsiveImage, Breakpoint, Size } from './image-loader';
+import { ImageLoadedEvent } from './image-loader/shared';
 
 @Component({
   selector: 'sn-root',
@@ -31,20 +32,38 @@ export class AppComponent {
   };
 
   /**
+   * Set to true on placeholder loaded event.
+   *
+   * @type {boolean}
+   * @memberof AppComponent
+   */
+  placeholderLoaded = false;
+
+  /**
    * Incremented on each image load event.
    *
    * @type {number}
-   * @memberof ImageLoaderComponent
+   * @memberof AppComponent
    */
-  imageLoadedEventCount = 0;
+  fullResLoadedEventCount = 0;
 
   /**
    * Increments event count on each image loaded event.
    * Counter displayed in component template.
    *
-   * @memberof ImageLoaderComponent
+   * @memberof AppComponent
    */
-  public onImageLoad(event) {
-    this.imageLoadedEventCount++;
+  public onPlaceholderLoad(imageLoadedEvent: ImageLoadedEvent) {
+    this.placeholderLoaded = true;
+  }
+
+  /**
+   * Increments event count on each image loaded event.
+   * Counter displayed in component template.
+   *
+   * @memberof AppComponent
+   */
+  public onFullResLoad(imageLoadedEvent: ImageLoadedEvent) {
+    this.fullResLoadedEventCount++;
   }
 }
