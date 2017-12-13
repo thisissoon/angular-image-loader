@@ -1,11 +1,23 @@
-import { Component, Input, OnInit, HostBinding, HostListener, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  HostBinding,
+  HostListener,
+  AfterViewInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/debounceTime';
 
-import { ResponsiveImage, RetinaImage, Size, Breakpoint, Retina } from './shared/image.model';
 import * as classes from './shared/classes';
 import * as events from './shared/events';
+import { ImageLoadedEvent, ResponsiveImage, RetinaImage, Size, Breakpoint, Retina } from './shared';
 
 /**
  * A component that renders a `img` element with the correct image url
@@ -17,6 +29,8 @@ import * as events from './shared/events';
  *   [image]="image"
  *   [sizes]="sizes"
  *   imgClass="foo"
+ *   (imagePlaceholderLoaded)="onPlaceholderLoad($event)"
+ *   (imageLoaded)="onFullResLoad($event)"
  *   alt="lorem ipsum">
  * </sn-image-loader>
  * ```
@@ -134,6 +148,22 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof ImageLoaderComponent
    */
   public supportsSrcSet = false;
+  /**
+   * Output for placeholder image loaded event.
+   *
+   * @type {EventEmitter}
+   * @memberof ImageLoaderComponent
+   */
+  @Output()
+  public imagePlaceholderLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<ImageLoadedEvent>();
+  /**
+   * Output for full res image loaded event.
+   *
+   * @type {EventEmitter}
+   * @memberof ImageLoaderComponent
+   */
+  @Output()
+  public imageLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<ImageLoadedEvent>();
   /**
    * If true means the image has not been loaded yet and
    * the placeholder image is currently displayed
@@ -254,6 +284,23 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
       this.src = this.preloadSrc;
     this.preloadSrc = '';
     this.loaded = true;
+  }
+  /**
+   * When the main `img` element has loaded
+   *
+   * @memberof ImageLoaderComponent
+   */
+  public onImageLoad($event: Event): void {
+    const eventData = {
+      $event,
+      src: this.src,
+      srcset: this.srcset
+    };
+    if (!this.loaded) {
+      this.imagePlaceholderLoaded.emit(eventData);
+      return;
+    }
+    this.imageLoaded.emit(eventData);
   }
   /**
    * Trigger `ngUnsubscribe` complete on

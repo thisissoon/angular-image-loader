@@ -1,8 +1,10 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 import { ImageLoaderComponent } from './image-loader.component';
 import { Breakpoint, ResponsiveImage } from './shared/image.model';
+import { ImageLoadedEvent } from './index';
 
 describe('ImageLoaderComponent', () => {
   let fixture: ComponentFixture<ImageLoaderComponent>;
@@ -53,6 +55,14 @@ describe('ImageLoaderComponent', () => {
   it('should set placeholder on init', () => {
     const spy = spyOn(component, 'setPlaceholder');
     component.ngOnInit();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should set fire placeholder loaded event on image load when loaded is false', () => {
+    const spy = spyOn(component.imagePlaceholderLoaded, 'emit');
+    component.loaded = false;
+    const imageElement = fixture.debugElement.query(By.css('img'));
+    imageElement.triggerEventHandler('load', null);
     expect(spy).toHaveBeenCalled();
   });
 
@@ -143,6 +153,14 @@ describe('ImageLoaderComponent', () => {
     component.onImagePreload();
     expect(component.srcset)
       .toEqual('http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x');
+  });
+
+  it('should emit a full res loaded event on image load when loaded is true', () => {
+    const spy = spyOn(component.imageLoaded, 'emit');
+    component.loaded = true;
+    const imageElement = fixture.debugElement.query(By.css('img'));
+    imageElement.triggerEventHandler('load', null);
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should complete observable', () => {

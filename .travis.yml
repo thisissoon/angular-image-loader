@@ -18,3 +18,9 @@ script:
   - npm run test -- --no-progress --code-coverage --single-run --browser=ChromeNoSandbox
   - npm run e2e -- --no-progress
   - npm run coverage
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
