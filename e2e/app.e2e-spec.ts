@@ -16,6 +16,18 @@ describe('ImageLoader Lib E2E Tests', function () {
     });
   });
 
+  describe('placeholder image', () => {
+    beforeEach(() => page.setWindowSize(300, 580));
+
+    it('should load placeholder image', () => {
+      expect(page.getImageElement().getAttribute('src')).toEqual('http://via.placeholder.com/35x15?text=placeholder');
+    });
+
+    it('should update placeholder loaded boolean on init', () => {
+      expect(page.getplaceholderBooleanElement().getText()).toEqual('true');
+    });
+  });
+
   describe('lazy load image', () => {
     beforeEach(() => page.setWindowSize(300, 580));
 
@@ -36,13 +48,24 @@ describe('ImageLoader Lib E2E Tests', function () {
       expect(imgSrc).toEqual('http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x');
 
     });
+
+    it('should update full res image event count on when in viewport', () => {
+      expect(page.getFullResCountElement().getText()).toEqual('0');
+
+      page.scrollTo(0, 580 * 1.5)
+        .then(() => {
+          browser.wait(() => page.getLoadedImageElement());
+        });
+
+      expect(page.getFullResCountElement().getText()).toEqual('1');
+    });
+
   });
 
   describe('responsive image', () => {
     beforeEach(() => page.setWindowSize(300, 580));
 
     it('should load correct image for device size', () => {
-
       page.scrollTo(0, 580 * 1.5)
         .then(() => {
           browser.wait(() => page.getLoadedImageElement());
@@ -70,38 +93,27 @@ describe('ImageLoader Lib E2E Tests', function () {
       expect(imgSrc).toEqual('http://via.placeholder.com/700x400?text=lg+1x 1x, http://via.placeholder.com/1400x800?text=lg+2x 2x');
     });
 
-  });
+    it('should update image loaded event count on window resize when image in viewport', () => {
+      expect(page.getFullResCountElement().getText()).toEqual('0');
 
-  describe('iamge loaded', () => {
-    beforeEach(() => page.setWindowSize(300, 580));
-
-    it('should fire an event on placeholder image load', () => {
-      expect(page.getCountElement().getText()).toEqual('1');
-    });
-
-    it('should update image loaded event count on when image in viewport', () => {
       page.scrollTo(0, 580 * 1.5)
         .then(() => {
           browser.wait(() => page.getLoadedImageElement());
         });
-      expect(page.getCountElement().getText()).toEqual('2');
-    });
 
-    it('should update image loaded event count on image load on window resize when image in viewport', () => {
+      expect(page.getFullResCountElement().getText()).toEqual('1');
 
-      page.scrollTo(0, 580 * 1.5)
-        .then(() => page.setWindowSize(768, 580))
+      page.setWindowSize(768, 580)
         .then(() => {
           browser.wait(() => page.getLoadedImageElement());
         });
-      expect(page.getCountElement().getText()).toEqual('3');
+      expect(page.getFullResCountElement().getText()).toEqual('2');
 
       page.setWindowSize(1024, 580)
         .then(() => {
           browser.wait(() => page.getLoadedImageElement());
         });
-      expect(page.getCountElement().getText()).toEqual('4');
-
+      expect(page.getFullResCountElement().getText()).toEqual('3');
     });
 
   });

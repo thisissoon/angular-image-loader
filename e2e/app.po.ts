@@ -25,7 +25,11 @@ export class AppPage {
     return element(by.css('.sn-image-loaded')).isPresent();
   }
 
-  getCountElement() {
-    return element(by.css('.count'));
+  getplaceholderBooleanElement() {
+    return element(by.css('.placeholder-boolean'));
+  }
+
+  getFullResCountElement() {
+    return element(by.css('.full-res-count'));
   }
 }
