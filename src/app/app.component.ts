@@ -37,7 +37,7 @@ export class AppComponent {
    * @type {boolean}
    * @memberof AppComponent
    */
-  placeholderLoaded = false;
+  imagePlaceholderLoaded = false;
 
   /**
    * Incremented on each image load event.
@@ -45,7 +45,7 @@ export class AppComponent {
    * @type {number}
    * @memberof AppComponent
    */
-  fullResLoadedEventCount = 0;
+  imageLoadedEventCount = 0;
 
   /**
    * Increments event count on each image loaded event.
@@ -54,7 +54,7 @@ export class AppComponent {
    * @memberof AppComponent
    */
   public onPlaceholderLoad(imageLoadedEvent: ImageLoadedEvent) {
-    this.placeholderLoaded = true;
+    this.imagePlaceholderLoaded = true;
   }
 
   /**
@@ -64,6 +64,6 @@ export class AppComponent {
    * @memberof AppComponent
    */
   public onFullResLoad(imageLoadedEvent: ImageLoadedEvent) {
-    this.fullResLoadedEventCount++;
+    this.imageLoadedEventCount++;
   }
 }

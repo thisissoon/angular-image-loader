@@ -59,7 +59,7 @@ describe('ImageLoaderComponent', () => {
   });
 
   it('should set fire placeholder loaded event on image load when loaded is false', () => {
-    const spy = spyOn(component.placeholderLoaded, 'emit');
+    const spy = spyOn(component.imagePlaceholderLoaded, 'emit');
     component.loaded = false;
     const imageElement = fixture.debugElement.query(By.css('img'));
     imageElement.triggerEventHandler('load', null);
@@ -156,7 +156,7 @@ describe('ImageLoaderComponent', () => {
   });
 
   it('should emit a full res loaded event on image load when loaded is true', () => {
-    const spy = spyOn(component.fullResLoaded, 'emit');
+    const spy = spyOn(component.imageLoaded, 'emit');
     component.loaded = true;
     const imageElement = fixture.debugElement.query(By.css('img'));
     imageElement.triggerEventHandler('load', null);

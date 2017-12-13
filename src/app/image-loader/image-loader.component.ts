@@ -29,8 +29,8 @@ import { ImageLoadedEvent, ResponsiveImage, RetinaImage, Size, Breakpoint, Retin
  *   [image]="image"
  *   [sizes]="sizes"
  *   imgClass="foo"
- *   (placeholderLoaded)="onPlaceholderLoad($event)"
- *   (fullResLoaded)="onFullResLoad($event)"
+ *   (imagePlaceholderLoaded)="onPlaceholderLoad($event)"
+ *   (imageLoaded)="onFullResLoad($event)"
  *   alt="lorem ipsum">
  * </sn-image-loader>
  * ```
@@ -155,7 +155,7 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof ImageLoaderComponent
    */
   @Output()
-  public placeholderLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<ImageLoadedEvent>();
+  public imagePlaceholderLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<ImageLoadedEvent>();
   /**
    * Output for full res image loaded event.
    *
@@ -163,7 +163,7 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof ImageLoaderComponent
    */
   @Output()
-  public fullResLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<ImageLoadedEvent>();
+  public imageLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<ImageLoadedEvent>();
   /**
    * If true means the image has not been loaded yet and
    * the placeholder image is currently displayed
@@ -297,10 +297,10 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
       srcset: this.srcset
     };
     if (!this.loaded) {
-      this.placeholderLoaded.emit(eventData);
+      this.imagePlaceholderLoaded.emit(eventData);
       return;
     }
-    this.fullResLoaded.emit(eventData);
+    this.imageLoaded.emit(eventData);
   }
   /**
    * Trigger `ngUnsubscribe` complete on
