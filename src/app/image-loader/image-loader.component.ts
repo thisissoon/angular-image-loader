@@ -15,9 +15,9 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/debounceTime';
 
-import { ResponsiveImage, RetinaImage, Size, Breakpoint, Retina } from './shared/image.model';
 import * as classes from './shared/classes';
 import * as events from './shared/events';
+import { ImageLoadedEvent, ResponsiveImage, RetinaImage, Size, Breakpoint, Retina } from './shared';
 
 /**
  * A component that renders a `img` element with the correct image url
@@ -29,6 +29,8 @@ import * as events from './shared/events';
  *   [image]="image"
  *   [sizes]="sizes"
  *   imgClass="foo"
+ *   (placeholderLoaded)="onPlaceholderLoad($event)"
+ *   (fullResLoaded)="onFullResLoad($event)"
  *   alt="lorem ipsum">
  * </sn-image-loader>
  * ```
@@ -147,14 +149,21 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   public supportsSrcSet = false;
   /**
-   * Output for image loaded event.
-   * Event payload is object representation of loaded image.
+   * Output for placeholder image loaded event.
    *
    * @type {EventEmitter}
    * @memberof ImageLoaderComponent
    */
   @Output()
-  public imageLoaded: EventEmitter<ResponsiveImage> = new EventEmitter<ResponsiveImage>();
+  public placeholderLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<ImageLoadedEvent>();
+  /**
+   * Output for full res image loaded event.
+   *
+   * @type {EventEmitter}
+   * @memberof ImageLoaderComponent
+   */
+  @Output()
+  public fullResLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<ImageLoadedEvent>();
   /**
    * If true means the image has not been loaded yet and
    * the placeholder image is currently displayed
@@ -281,8 +290,17 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    *
    * @memberof ImageLoaderComponent
    */
-  public onImageLoad(image: ResponsiveImage): void {
-    this.imageLoaded.emit(image);
+  public onImageLoad($event: Event): void {
+    const eventData = {
+      $event,
+      src: this.src,
+      srcset: this.srcset
+    };
+    if (!this.loaded) {
+      this.placeholderLoaded.emit(eventData);
+      return;
+    }
+    this.fullResLoaded.emit(eventData);
   }
   /**
    * Trigger `ngUnsubscribe` complete on
