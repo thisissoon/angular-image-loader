@@ -4,6 +4,8 @@ import { browser } from 'protractor';
 describe('ImageLoader Lib E2E Tests', function () {
   let page: AppPage;
 
+  const browserWaitTimeout = 10000;
+
   beforeEach(() => page = new AppPage());
 
   beforeEach(() => page.navigateTo());
@@ -80,7 +82,7 @@ describe('ImageLoader Lib E2E Tests', function () {
         .then(() => {
           browser.wait(() => page.getLoadedImageElementBySrcSet(
             'http://via.placeholder.com/350x250?text=md+1x 1x, http://via.placeholder.com/700x500?text=md+2x 2x'
-          ), 5000);
+          ), browserWaitTimeout);
         });
 
       imgSrc = page.getImageElement().getAttribute('srcset');
@@ -90,7 +92,7 @@ describe('ImageLoader Lib E2E Tests', function () {
         .then(() => {
           browser.wait(() => page.getLoadedImageElementBySrcSet(
             'http://via.placeholder.com/700x400?text=lg+1x 1x, http://via.placeholder.com/1400x800?text=lg+2x 2x'
-          ), 5000);
+          ), browserWaitTimeout);
         });
 
       imgSrc = page.getImageElement().getAttribute('srcset');
@@ -111,7 +113,7 @@ describe('ImageLoader Lib E2E Tests', function () {
         .then(() => {
           browser.wait(() => page.getLoadedImageElementBySrcSet(
             'http://via.placeholder.com/350x250?text=md+1x 1x, http://via.placeholder.com/700x500?text=md+2x 2x'
-          ), 5000);
+          ), browserWaitTimeout);
         });
       expect(page.getFullResCountElement().getText()).toEqual('2');
 
@@ -119,7 +121,7 @@ describe('ImageLoader Lib E2E Tests', function () {
         .then(() => {
           browser.wait(() => page.getLoadedImageElementBySrcSet(
             'http://via.placeholder.com/700x400?text=lg+1x 1x, http://via.placeholder.com/1400x800?text=lg+2x 2x'
-          ), 5000);
+          ), browserWaitTimeout);
         });
       expect(page.getFullResCountElement().getText()).toEqual('3');
     });
