@@ -4,7 +4,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.4.
 
-A simple progressive/responsive/lazy loading image library for [Angular (2/4+)][angular] that detects browser size and loads the appropriate image only when the element is in view. This package requires [angular-inviewport][angular-inviewport]
+A simple progressive/responsive/lazy loading image library for [Angular (2/4+)][angular] that detects browser size and loads the appropriate image only when the element is in view. Classes are attributed and events emited on image loads. This package requires [angular-inviewport][angular-inviewport].
 
 <img src="https://raw.githubusercontent.com/thisissoon/angular-image-loader/master/src/assets/example.gif" alt="example">
 
@@ -39,12 +39,19 @@ export class AppModule { }
 
 ## Example
 
-a working example can be found inside [/src](https://github.com/thisissoon/angular-image-loader/tree/master/src) folder
+A working example can be found inside [/src](https://github.com/thisissoon/angular-image-loader/tree/master/src) folder.
 
 ### `app.component.html`
 
 ```html
-<sn-image-loader [image]="image" [sizes]="sizes" imgClass="foo" alt="lorem ipsum"></sn-image-loader>
+<sn-image-loader 
+	[image]="image"
+	[sizes]="sizes"
+	imgClass="foo"
+	alt="lorem ipsum"
+	(imagePlaceholderLoaded)="onPlaceholderLoad($event)"
+	(imageLoaded)="onFullResLoad($event)">
+</sn-image-loader>
 ```
 
 ### `app.component.ts`
@@ -73,6 +80,14 @@ export class AppComponent {
       '@2x': 'http://via.placeholder.com/1400x800?text=lg+2x'
     }
   };
+
+  public onPlaceholderLoad(imageLoadedEvent: ImageLoadedEvent) {
+    // Do something
+  }
+  
+  public onFullResLoad(imageLoadedEvent: ImageLoadedEvent) {
+    // Do something
+  }
 }
 ```
 
