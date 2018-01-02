@@ -2,9 +2,15 @@ import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
+import { WindowRef } from '@thisissoon/angular-inviewport';
+
 import { ImageLoaderComponent } from './image-loader.component';
 import { Breakpoint, ResponsiveImage } from './shared/image.model';
 import { ImageLoadedEvent } from './index';
+
+class MockWindowRef {
+  public innerWidth = 800;
+}
 
 describe('ImageLoaderComponent', () => {
   let fixture: ComponentFixture<ImageLoaderComponent>;
@@ -40,7 +46,10 @@ describe('ImageLoaderComponent', () => {
       ],
       declarations: [
         ImageLoaderComponent
-      ]
+      ],
+      providers: [
+        { provide: WindowRef, useClass: MockWindowRef }
+      ],
     }).compileComponents();
   }));
 
@@ -52,13 +61,17 @@ describe('ImageLoaderComponent', () => {
     fixture.detectChanges();
   });
 
+  it('should update size based on window ref object on init', () => {
+    expect(component.size).toEqual('md');
+  });
+
   it('should set placeholder on init', () => {
     const spy = spyOn(component, 'setPlaceholder');
     component.ngOnInit();
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should set fire placeholder loaded event on image load when loaded is false', () => {
+  it('should fire placeholder loaded event on image load when loaded is false', () => {
     const spy = spyOn(component.imagePlaceholderLoaded, 'emit');
     component.loaded = false;
     const imageElement = fixture.debugElement.query(By.css('img'));
@@ -168,4 +181,5 @@ describe('ImageLoaderComponent', () => {
     component.ngOnDestroy();
     expect(spy).toHaveBeenCalled();
   });
+
 });
