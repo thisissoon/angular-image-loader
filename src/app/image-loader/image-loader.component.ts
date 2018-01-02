@@ -18,6 +18,7 @@ import 'rxjs/add/operator/debounceTime';
 import * as classes from './shared/classes';
 import * as events from './shared/events';
 import { ImageLoadedEvent, ResponsiveImage, RetinaImage, Size, Breakpoint, Retina } from './shared';
+import { WindowRef } from '@thisissoon/angular-inviewport';
 
 /**
  * A component that renders a `img` element with the correct image url
@@ -186,6 +187,15 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
     return !this.loaded;
   }
   /**
+   * Creates instance of component. Updates this.size
+   * based on window width.
+   *
+   * @memberof ImageLoaderComponent
+   */
+  constructor(private windowRef: WindowRef) {
+    this.onWidthChange(this.windowRef.innerWidth);
+  }
+  /**
    * Set placeholder image as image on component init
    *
    * @memberof ImageLoaderComponent
@@ -207,7 +217,7 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe$)
       .debounceTime(10)
       .subscribe((width) => this.onWidthChange(width));
-    this.width$.next(dummyImg.offsetWidth);
+    this.width$.next(this.windowRef.innerWidth);
   }
   /**
    * If element is in viewport preload image by setting the src
