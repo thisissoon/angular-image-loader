@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.2"></a>
+## [1.2.2](https://github.com/thisissoon/angular-image-loader/compare/v1.2.1...v1.2.2) (2018-01-03)
+
+
+### Bug Fixes
+
+* **component:** moved initial width update function from constructor to ngOnInit ([5f03694](https://github.com/thisissoon/angular-image-loader/commit/5f03694))
+* **Demo app:** Updated dom query functions to target bottom image comp. Added tests for top image co ([d3e06d1](https://github.com/thisissoon/angular-image-loader/commit/d3e06d1))
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/thisissoon/angular-image-loader/compare/v1.2.0...v1.2.1) (2018-01-02)
 
