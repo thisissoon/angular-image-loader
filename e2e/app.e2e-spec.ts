@@ -91,7 +91,7 @@ describe('ImageLoader Lib E2E Tests', function () {
 
     it('should load correct image for "md" device size', () => {
       page.setWindowSize(768, 580);
-      page.scrollTo(0, 580 * 2.5);
+      page.scrollTo(0, 580 * 2);
       browser.wait(() => page.getLoadedImageBottomElement());
 
       const imgSrc = page.getImageBottomElement().getAttribute('srcset');
