@@ -192,15 +192,14 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    *
    * @memberof ImageLoaderComponent
    */
-  constructor(private windowRef: WindowRef) {
-    this.onWidthChange(this.windowRef.innerWidth);
-  }
+  constructor(private windowRef: WindowRef) {}
   /**
    * Set placeholder image as image on component init
    *
    * @memberof ImageLoaderComponent
    */
   public ngOnInit(): void {
+    this.onWidthChange(this.windowRef.innerWidth);
     this.setPlaceholder();
   }
   /**

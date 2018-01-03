@@ -7,21 +7,21 @@
   min-height: 150vh;
 }
 
-:host ::ng-deep .foo {
+:host ::ng-deep .img {
   transition: all .35s ease-in-out;
   width: 150px;
 }
 
 @media (min-width: 768px) {
-  :host ::ng-deep .foo {
+  :host ::ng-deep .img {
     width: 500px;
   }
 }
 
-:host ::ng-deep .sn-image-not-loaded .foo {
+:host ::ng-deep .sn-image-not-loaded .img {
   filter: blur(20px);
 }
 
-:host ::ng-deep .sn-image-loaded .foo {
+:host ::ng-deep .sn-image-loaded .img {
   filter: blur(0px);
 }
