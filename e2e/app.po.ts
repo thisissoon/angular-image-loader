@@ -13,27 +13,39 @@ export class AppPage {
     return browser.driver.manage().window().setSize(x, y);
   }
 
-  getImageLoaderComp() {
-    return element(by.css('sn-image-loader'));
+  getImageTopLoaderComp() {
+    return element(by.css('.sn-image-loader--top'));
   }
 
-  getImageElement() {
-    return element(by.css('sn-image-loader .foo'));
+  getImageBottomLoaderComp() {
+    return element(by.css('.sn-image-loader--bottom'));
   }
 
-  getLoadedImageElement() {
-    return element(by.css('.sn-image-loaded')).isPresent();
+  getImageTopElement() {
+    return element(by.css('.sn-image-loader--top .img'));
+  }
+
+  getImageBottomElement() {
+    return element(by.css('.sn-image-loader--bottom .img'));
+  }
+
+  getLoadedImageBottomElement() {
+    return element(by.css('.sn-image-loader--bottom.sn-image-loaded')).isPresent();
+  }
+
+  getLoadedImageTopElement() {
+    return element(by.css('.sn-image-loader--top.sn-image-loaded')).isPresent();
   }
 
   getLoadedImageElementBySrcSet(srcSet) {
-    return element(by.css(`img[srcSet="${srcSet}"]`)).isPresent();
+    return element(by.css(`.img--bottom[srcSet="${srcSet}"]`)).isPresent();
   }
 
-  getplaceholderBooleanElement() {
+  getBottomPlaceholderBooleanElement() {
     return element(by.css('.placeholder-boolean'));
   }
 
-  getFullResCountElement() {
+  getBottomFullResCountElement() {
     return element(by.css('.full-res-count'));
   }
 }
