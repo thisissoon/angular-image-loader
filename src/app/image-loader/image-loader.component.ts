@@ -17,7 +17,7 @@ import 'rxjs/add/operator/debounceTime';
 
 import * as classes from './shared/classes';
 import * as events from './shared/events';
-import { ImageLoadedEvent, ResponsiveImage, RetinaImage, Size, Breakpoint, Retina } from './shared';
+import { ImageLoadedEvent, ResponsiveImage, RetinaImage, Size, Breakpoint } from './shared';
 import { WindowRef } from '@thisissoon/angular-inviewport';
 
 /**
@@ -272,8 +272,9 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   public preloadImage(): void {
     if (this.inViewport && this.notLoaded) {
-      const imageNormal = this.image[this.size]['@1x'];
-      const imageRetina = this.image[this.size]['@2x'];
+      const retinaImg = this.image.images.filter(retinaImage => retinaImage.size === this.size)[0];
+      const imageNormal = retinaImg.x1;
+      const imageRetina = retinaImg.x2;
       this.supportsSrcSet ?
         this.preloadSrcset = `${imageNormal} 1x, ${imageRetina} 2x` :
         this.preloadSrc = `${imageNormal}`;
@@ -286,8 +287,9 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof ImageLoaderComponent
    */
   public onImagePreload(): void {
-    const imageNormal = this.image[this.size]['@1x'];
-    const imageRetina = this.image[this.size]['@2x'];
+    const retinaImg = this.image.images.filter(retinaImage => retinaImage.size === this.size)[0];
+    const imageNormal = retinaImg.x1;
+    const imageRetina = retinaImg.x2;
     this.supportsSrcSet ?
       this.srcset = `${imageNormal} 1x, ${imageRetina} 2x` :
       this.src = this.preloadSrc;
