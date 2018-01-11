@@ -87,12 +87,14 @@ describe('ImageLoaderComponent', () => {
 
   it('should set supportsSrcSet value', () => {
     component.supportsSrcSet = false;
+    component.inViewport = true;
+    component.loaded = false;
     const img = document.createElement('img');
     let srcSupport = false;
     if ('srcset' in img) {
       srcSupport = true;
     }
-    component.ngAfterViewInit();
+    component.preloadImage();
     expect(component.supportsSrcSet).toEqual(srcSupport);
   });
 
@@ -143,6 +145,7 @@ describe('ImageLoaderComponent', () => {
     component.supportsSrcSet = false;
     component.size = 'xs';
     component.loaded = false;
+    component.dummyImg.nativeElement = { src: null };
     component.preloadImage();
     expect(component.preloadSrc).toEqual('http://via.placeholder.com/150x350?text=xs+1x');
 
@@ -157,6 +160,7 @@ describe('ImageLoaderComponent', () => {
     component.supportsSrcSet = false;
     component.size = 'xs';
     component.loaded = false;
+    component.dummyImg.nativeElement = { src: null };
     component.preloadImage();
     expect(component.preloadSrc).toEqual('http://via.placeholder.com/150x350?text=xs+1x');
 

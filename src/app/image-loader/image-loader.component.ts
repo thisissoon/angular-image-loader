@@ -208,10 +208,6 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof ImageLoaderComponent
    */
   public ngAfterViewInit(): void {
-    const dummyImg: HTMLElement = this.dummyImg.nativeElement;
-    if ('srcset' in dummyImg) {
-      this.supportsSrcSet = true;
-    }
     this.width$
       .takeUntil(this.ngUnsubscribe$)
       .debounceTime(10)
@@ -275,6 +271,9 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
       const retinaImg = this.image.images.filter(retinaImage => retinaImage.size === this.size)[0];
       const imageNormal = retinaImg.x1;
       const imageRetina = retinaImg.x2;
+      if ('srcset' in this.dummyImg.nativeElement) {
+        this.supportsSrcSet = true;
+      }
       this.supportsSrcSet ?
         this.preloadSrcset = `${imageNormal} 1x, ${imageRetina} 2x` :
         this.preloadSrc = `${imageNormal}`;
