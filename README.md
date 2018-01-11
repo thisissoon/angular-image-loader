@@ -49,8 +49,8 @@ A working example can be found inside [/src](https://github.com/thisissoon/angul
 	[sizes]="sizes"
 	imgClass="foo"
 	alt="lorem ipsum"
-	(imagePlaceholderLoaded)="onPlaceholderLoad($event)"
-	(imageLoaded)="onFullResLoad($event)">
+	(placeholderLoaded)="onPlaceholderLoad($event)"
+	(imageLoaded)="onImageLoad($event)">
 </sn-image-loader>
 ```
 
@@ -85,7 +85,7 @@ export class AppComponent {
     // Do something
   }
   
-  public onFullResLoad(imageLoadedEvent: ImageLoadedEvent) {
+  public onImageLoad(imageLoadedEvent: ImageLoadedEvent) {
     // Do something
   }
 }
