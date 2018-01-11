@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0-rc.1"></a>
+# [2.0.0-rc.1](https://github.com/thisissoon/angular-image-loader/compare/v2.0.0-rc.0...v2.0.0-rc.1) (2018-01-11)
+
+
+### Bug Fixes
+
+* **Imageloader:** fixed issue where browser would load both 1x and 2x images if the element was invi ([07400fd](https://github.com/thisissoon/angular-image-loader/commit/07400fd))
+
+
+
 <a name="2.0.0-rc.0"></a>
 # [2.0.0-rc.0](https://github.com/thisissoon/angular-image-loader/compare/v1.2.2...v2.0.0-rc.0) (2018-01-11)
 
