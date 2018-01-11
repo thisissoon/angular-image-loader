@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0-rc.0"></a>
+# [2.0.0-rc.0](https://github.com/thisissoon/angular-image-loader/compare/v1.2.2...v2.0.0-rc.0) (2018-01-11)
+
+
+### Bug Fixes
+
+* **build:** fix ts error in packagr build ([26e874b](https://github.com/thisissoon/angular-image-loader/commit/26e874b))
+
+
+### Code Refactoring
+
+* **app:** Changed the models for ResponsiveImage and RetinaImage to allow for more flexible ima ([d78fc4e](https://github.com/thisissoon/angular-image-loader/commit/d78fc4e))
+* **function and variable names:** updated image and full res image loaded event handlers and tr ([2a1bb76](https://github.com/thisissoon/angular-image-loader/commit/2a1bb76))
+
+
+### BREAKING CHANGES
+
+* **function and variable names:** imagePlaceholderLoaded output changed to placeholderLoaded
+* **app:** sn-image-loader component now expects a differently structured responsiveImage
+object.
+
+
+
 <a name="1.2.2"></a>
 ## [1.2.2](https://github.com/thisissoon/angular-image-loader/compare/v1.2.1...v1.2.2) (2018-01-03)
 
