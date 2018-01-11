@@ -5,8 +5,9 @@ import { By } from '@angular/platform-browser';
 import { WindowRef } from '@thisissoon/angular-inviewport';
 
 import { ImageLoaderComponent } from './image-loader.component';
-import { Breakpoint, ResponsiveImage } from './shared/image.model';
-import { ImageLoadedEvent } from './index';
+import { ResponsiveImage } from './shared/image.model';
+import { Breakpoint } from './shared/breakpoint.model';
+import { ImageLoadedEvent } from './shared/image-loaded-event.model';
 
 class MockWindowRef {
   public innerWidth = 800;

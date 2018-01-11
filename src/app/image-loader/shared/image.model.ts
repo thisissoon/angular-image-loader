@@ -10,9 +10,9 @@ export interface RetinaImage {
   x2?: string;
 }
 
-export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-
-export interface Breakpoint {
-  size: Size;
-  width: number;
-}
+export type Size =
+  'xs' |
+  'sm' |
+  'md' |
+  'lg' |
+  'xl';
