@@ -77,7 +77,7 @@ describe('ImageLoaderComponent', () => {
   });
 
   it('should fire placeholder loaded event on image load when loaded is false', () => {
-    const spy = spyOn(component.imagePlaceholderLoaded, 'emit');
+    const spy = spyOn(component.placeholderLoaded, 'emit');
     component.loaded = false;
     const imageElement = fixture.debugElement.query(By.css('img'));
     imageElement.triggerEventHandler('load', null);

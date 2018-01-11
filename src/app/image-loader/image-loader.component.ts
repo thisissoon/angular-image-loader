@@ -30,8 +30,8 @@ import { WindowRef } from '@thisissoon/angular-inviewport';
  *   [image]="image"
  *   [sizes]="sizes"
  *   imgClass="foo"
- *   (imagePlaceholderLoaded)="onPlaceholderLoad($event)"
- *   (imageLoaded)="onFullResLoad($event)"
+ *   (placeholderLoaded)="onPlaceholderLoad($event)"
+ *   (imageLoaded)="onImageLoad($event)"
  *   alt="lorem ipsum">
  * </sn-image-loader>
  * ```
@@ -156,7 +156,7 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof ImageLoaderComponent
    */
   @Output()
-  public imagePlaceholderLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<ImageLoadedEvent>();
+  public placeholderLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<ImageLoadedEvent>();
   /**
    * Output for full res image loaded event.
    *
@@ -308,7 +308,7 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
       srcset: this.srcset
     };
     if (!this.loaded) {
-      this.imagePlaceholderLoaded.emit(eventData);
+      this.placeholderLoaded.emit(eventData);
       return;
     }
     this.imageLoaded.emit(eventData);
