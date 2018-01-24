@@ -9,9 +9,9 @@ import { ImageLoadedEvent } from './image-loader/shared';
 })
 export class AppComponent {
   sizes: Breakpoint[] = [
-    { size: 'xs', width: 0},
-    { size: 'md', width: 768},
-    { size: 'lg', width: 992},
+    { size: 'xs', width: 0 },
+    { size: 'md', width: 768 },
+    { size: 'lg', width: 992 },
   ];
 
   image: ResponsiveImage = {

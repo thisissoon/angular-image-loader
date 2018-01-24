@@ -4,8 +4,8 @@
   [sizes]="sizes"
   imgClass="img img--top"
   alt="lorem ipsum"
-  class="sn-image-loader sn-image-loader--top"
-></sn-image-loader>
+  class="sn-image-loader sn-image-loader--top">
+</sn-image-loader>
 
 <h1>Scroll down for bottom image ↓</h1>
 <h3>Bottom placeholder loaded: <span class="placeholder-boolean">{{ placeholderLoaded }}</span></h3>
@@ -13,13 +13,13 @@
 
 <h3>Bottom image</h3>
 <sn-image-loader
-[image]="image"
-[sizes]="sizes"
-imgClass="img img--bottom"
-alt="lorem ipsum"
-(placeholderLoaded)="onPlaceholderLoad($event)"
-(imageLoaded)="onImageLoad($event)"
-class="sn-image-loader sn-image-loader--bottom"
-></sn-image-loader>
+  [image]="image"
+  [sizes]="sizes"
+  imgClass="img img--bottom"
+  alt="lorem ipsum"
+  (placeholderLoaded)="onPlaceholderLoad($event)"
+  (imageLoaded)="onImageLoad($event)"
+  class="sn-image-loader sn-image-loader--bottom">
+</sn-image-loader>
 <h3>Bottom image imageLoaded event count: <span class="full-res-count">{{ imageLoadedEventCount }}</span></h3>
 <div class="spacer"></div>

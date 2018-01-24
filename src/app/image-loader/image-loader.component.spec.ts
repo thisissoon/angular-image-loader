@@ -192,4 +192,10 @@ describe('ImageLoaderComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
+  it('should load fallback image', () => {
+    component.src = '';
+    component.onImagePreloadError();
+    expect(component.src).toEqual(image.fallback);
+  });
+
 });

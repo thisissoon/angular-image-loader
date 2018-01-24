@@ -296,6 +296,16 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.loaded = true;
   }
   /**
+   *
+   * @memberof ImageLoaderComponent
+   */
+  public onImagePreloadError(): void {
+    this.srcset = '';
+    this.src = this.image.fallback;
+    this.preloadSrc = '';
+    this.loaded = true;
+  }
+  /**
    * When the main `img` element has loaded
    *
    * @memberof ImageLoaderComponent
