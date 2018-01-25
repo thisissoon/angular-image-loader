@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/thisissoon/angular-image-loader/compare/v2.0.1...v2.0.2) (2018-01-25)
+
+
+### Bug Fixes
+
+* **ImageLoader:** fallback image being loaded when clearing src value from dummy image ([ecef4aa](https://github.com/thisissoon/angular-image-loader/commit/ecef4aa))
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/thisissoon/angular-image-loader/compare/v2.0.0...v2.0.1) (2018-01-24)
 
