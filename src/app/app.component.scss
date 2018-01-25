@@ -9,13 +9,7 @@
 
 :host ::ng-deep .img {
   transition: all .35s ease-in-out;
-  width: 150px;
-}
-
-@media (min-width: 768px) {
-  :host ::ng-deep .img {
-    width: 500px;
-  }
+  width: 100%;
 }
 
 :host ::ng-deep .sn-image-not-loaded .img {

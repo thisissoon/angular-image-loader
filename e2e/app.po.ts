@@ -6,11 +6,25 @@ export class AppPage {
   }
 
   scrollTo(x: number = 0, y: number = 0) {
-    return browser.executeScript(`window.scrollTo(${x}, ${y})`);
+    browser.executeScript(`return window.scrollTo(${x}, ${y});`);
+    return browser.wait(() =>
+      this.getScrollYPosition()
+        .then((posY) => posY === y));
   }
 
   setWindowSize(x: number, y: number) {
-    return browser.driver.manage().window().setSize(x, y);
+    browser.driver.manage().window().setSize(x, y);
+    return browser.wait(() =>
+      this.getWindowSize()
+        .then((size: any) => size.height === y && size.width === x));
+  }
+
+  getWindowSize() {
+    return browser.executeScript(`return { height: window.outerHeight, width: window.outerWidth };`);
+  }
+
+  getScrollYPosition() {
+    return browser.executeScript('return window.pageYOffset;');
   }
 
   getImageTopLoaderComp() {
