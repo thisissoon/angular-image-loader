@@ -300,10 +300,13 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof ImageLoaderComponent
    */
   public onImagePreloadError(): void {
-    this.srcset = '';
-    this.src = this.image.fallback;
-    this.preloadSrc = '';
-    this.loaded = true;
+    if (this.preloadSrc || this.preloadSrcset) {
+      this.srcset = '';
+      this.preloadSrc = '';
+      this.preloadSrcset = '';
+      this.src = this.image.fallback;
+      this.loaded = true;
+    }
   }
   /**
    * When the main `img` element has loaded

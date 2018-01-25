@@ -194,8 +194,17 @@ describe('ImageLoaderComponent', () => {
 
   it('should load fallback image', () => {
     component.src = '';
+    component.preloadSrc = 'someurl';
     component.onImagePreloadError();
     expect(component.src).toEqual(image.fallback);
+  });
+
+  it('should NOT load fallback image', () => {
+    component.src = '';
+    component.preloadSrc = '';
+    component.preloadSrcset = '';
+    component.onImagePreloadError();
+    expect(component.src).toEqual('');
   });
 
 });
