@@ -9,16 +9,19 @@ import {
   AfterViewInit,
   OnDestroy,
   ViewChild,
-  ElementRef
+  ElementRef,
+  NgZone
 } from '@angular/core';
+
 import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/takeUntil';
-import 'rxjs/add/operator/debounceTime';
+import { Observable } from 'rxjs/Observable';
+import { fromEvent } from 'rxjs/observable/fromEvent';
+import { takeUntil, debounceTime } from 'rxjs/operators';
+import { WindowRef } from '@thisissoon/angular-inviewport';
 
 import * as classes from './shared/classes';
 import * as events from './shared/events';
 import { ImageLoadedEvent, ResponsiveImage, RetinaImage, Size, Breakpoint } from './shared';
-import { WindowRef } from '@thisissoon/angular-inviewport';
 
 /**
  * A component that renders a `img` element with the correct image url
@@ -94,11 +97,11 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   @Input()
   public sizes: Breakpoint[] = [
-    { size: 'xs', width: 0},
-    { size: 'sm', width: 576},
-    { size: 'md', width: 768},
-    { size: 'lg', width: 992},
-    { size: 'xl', width: 1200}
+    { size: 'xs', width: 0 },
+    { size: 'sm', width: 576 },
+    { size: 'md', width: 768 },
+    { size: 'lg', width: 992 },
+    { size: 'xl', width: 1200 }
   ];
   /**
    * Current size of image to display
@@ -122,11 +125,12 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   public inViewport: boolean;
   /**
-   * Observable that emits the width of the viewport
+   * Amount of time to wait after last event
    *
+   * @type {number}
    * @memberof ImageLoaderComponent
    */
-  public width$ = new Subject<number>();
+  public debounce = 100;
   /**
    * Completes on component destroy lifecycle event
    * use to handle unsubscription from infinite observables
@@ -192,7 +196,10 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    *
    * @memberof ImageLoaderComponent
    */
-  constructor(private windowRef: WindowRef) {}
+  constructor(
+    private windowRef: WindowRef,
+    private ngZone: NgZone
+  ) {}
   /**
    * Set placeholder image as image on component init
    *
@@ -203,16 +210,23 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.setPlaceholder();
   }
   /**
-   * Subscribe to `width$` observable to update device
+   * Subscribe to `resize` window event observable
+   * and run callback
    *
    * @memberof ImageLoaderComponent
    */
   public ngAfterViewInit(): void {
-    this.width$
-      .takeUntil(this.ngUnsubscribe$)
-      .debounceTime(10)
-      .subscribe((width) => this.onWidthChange(width));
-    this.width$.next(this.windowRef.innerWidth);
+    // Listen for window scroll/resize events.
+    this.ngZone.runOutsideAngular(() => {
+      fromEvent(this.windowRef as any, events.eventResize)
+        .pipe(
+          takeUntil(this.ngUnsubscribe$),
+          debounceTime(this.debounce)
+        )
+        .subscribe((event: any) =>
+          this.ngZone.run(() => this.onWidthChange(event.target.innerWidth))
+        );
+    });
   }
   /**
    * If element is in viewport preload image by setting the src
@@ -240,16 +254,6 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
       this.setPlaceholder();
       this.preloadImage();
     }
-  }
-  /**
-   * Event handler for window resize;
-   *
-   * @param {number} width
-   * @memberof ImageLoaderComponent
-   */
-  @HostListener(events.eventResize, events.eventPathResize)
-  public onResize(width: number) {
-    this.width$.next(width);
   }
   /**
    * Set image to placeholder image

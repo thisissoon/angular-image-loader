@@ -6,9 +6,9 @@ import { ImageLoaderComponent } from './image-loader.component';
 
 /**
  * A simple progressive/responsive/lazy loading image library for
- * Angular (2/4+) that detects browser size and loads the appropriate
+ * Angular that detects browser size and loads the appropriate
  * image only when the element is in view.
- * This package requires angular-inviewport
+ * This package requires @thisissoon/angular-inviewport
  *
  * @export
  * @class ImageLoaderModule

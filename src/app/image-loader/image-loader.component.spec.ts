@@ -9,10 +9,6 @@ import { ResponsiveImage } from './shared/image.model';
 import { Breakpoint } from './shared/breakpoint.model';
 import { ImageLoadedEvent } from './shared/image-loaded-event.model';
 
-class MockWindowRef {
-  public innerWidth = 800;
-}
-
 describe('ImageLoaderComponent', () => {
   let fixture: ComponentFixture<ImageLoaderComponent>;
   let component: ImageLoaderComponent;
@@ -21,6 +17,7 @@ describe('ImageLoaderComponent', () => {
     { size: 'md', width: 768},
     { size: 'lg', width: 992},
   ];
+  let testBed;
 
   const image: ResponsiveImage = {
     placeholder: 'http://via.placeholder.com/35x15?text=placeholder',
@@ -45,7 +42,7 @@ describe('ImageLoaderComponent', () => {
   };
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    testBed = TestBed.configureTestingModule({
       schemas: [
         NO_ERRORS_SCHEMA,
         CUSTOM_ELEMENTS_SCHEMA
@@ -54,9 +51,11 @@ describe('ImageLoaderComponent', () => {
         ImageLoaderComponent
       ],
       providers: [
-        { provide: WindowRef, useClass: MockWindowRef }
+        WindowRef
       ],
-    }).compileComponents();
+    });
+
+    testBed.compileComponents();
   }));
 
   beforeEach(() => {
@@ -68,7 +67,7 @@ describe('ImageLoaderComponent', () => {
   });
 
   it('should update size based on window ref object on init', () => {
-    expect(component.size).toEqual('md');
+    expect(component.size).toEqual('xs');
   });
 
   it('should set placeholder on init', () => {
@@ -125,12 +124,6 @@ describe('ImageLoaderComponent', () => {
 
     component.onWidthChange(320);
     expect(component.size).toEqual('xs');
-  });
-
-  it('should emit next value of observable', () => {
-    const spy = spyOn(component.width$, 'next');
-    component.onResize(992);
-    expect(spy).toHaveBeenCalledWith(992);
   });
 
   it('should set placeholder image as empty string', () => {
