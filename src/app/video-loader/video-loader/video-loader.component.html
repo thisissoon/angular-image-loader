@@ -1,0 +1,23 @@
+<video
+  *ngIf="src"
+  [src]="src"
+  [class]="videoClass"
+  [poster]="posterImg.supportsSrcSet ? posterImg.srcset.split(' 1x')[0] : posterImg.src"
+  [autoplay]="autoplay"
+  [loop]="loop"
+  [muted]="muted"
+  [controls]="controls"
+  [attr.type]="type"
+  [attr.playsinline]="playsInline"
+  (loadeddata)="onVideoLoad()"
+  (inViewportChange)="onInViewportChange($event)"
+  snInViewport>
+
+  <sn-image-loader
+    #posterImg
+    [imgClass]="posterClass"
+    [image]="video.poster"
+    [sizes]="sizes"
+    [alt]="alt">
+  </sn-image-loader>
+</video>

@@ -23,3 +23,16 @@
 </sn-image-loader>
 <h3>Bottom image imageLoaded event count: <span class="full-res-count">{{ imageLoadedEventCount }}</span></h3>
 <div class="spacer"></div>
+
+<sn-video-loader
+  [sizes]="sizes"
+  [video]="video"
+  [loop]="true"
+  [muted]="true"
+  [autoplay]="true"
+  [controls]="true"
+  [playsInline]="true"
+  type="video/mp4"
+  videoClass="video"
+  posterClass="img">
+</sn-video-loader>

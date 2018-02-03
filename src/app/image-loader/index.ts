@@ -1,3 +1,3 @@
-export * from './image-loader.component';
-export * from './image-loader.module';
+export * from './image-loader';
 export * from './shared';
+export * from './image-loader.module';

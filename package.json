@@ -1,7 +1,7 @@
 {
   "name": "@thisissoon/angular-image-loader",
   "version": "2.0.2",
-  "description": "A simple progressive/responsive/lazy loading image library for Angular that detects browser size and loads the appropriate image only when the element is in view. This package requires @thisissoon/angular-inviewport",
+  "description": "A simple progressive, responsive, lazy  image and video loading library for Angular that detects browser size and loads the appropriate image or video only when the element is in viewport. This package requires @thisissoon/angular-inviewport",
   "keywords": [
     "angular",
     "angular 5",
@@ -12,7 +12,10 @@
     "image",
     "progressive",
     "responsive",
-    "lazy"
+    "lazy",
+    "video",
+    "video loader",
+    "responsive video"
   ],
   "author": "SOON_ <dorks@thisissoon.com>",
   "contributors": [
@@ -25,8 +28,8 @@
     "url": "https://github.com/thisissoon/angular-image-loader"
   },
   "engines": {
-    "node": ">= 6.9.0",
-    "npm": ">= 3.0.0"
+    "node": ">= 8.9.0",
+    "npm": ">= 5.5.0"
   },
   "scripts": {
     "ng": "ng",

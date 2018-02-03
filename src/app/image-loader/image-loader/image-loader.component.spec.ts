@@ -5,9 +5,9 @@ import { By } from '@angular/platform-browser';
 import { WindowRef } from '@thisissoon/angular-inviewport';
 
 import { ImageLoaderComponent } from './image-loader.component';
-import { ResponsiveImage } from './shared/image.model';
-import { Breakpoint } from './shared/breakpoint.model';
-import { ImageLoadedEvent } from './shared/image-loaded-event.model';
+import { ResponsiveImage } from '../shared/image.model';
+import { Breakpoint } from '../shared/breakpoint.model';
+import { ImageLoadedEvent } from '../shared/image-loaded-event.model';
 
 describe('ImageLoaderComponent', () => {
   let fixture: ComponentFixture<ImageLoaderComponent>;

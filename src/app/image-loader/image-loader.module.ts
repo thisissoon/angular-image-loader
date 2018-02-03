@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InViewportModule } from '@thisissoon/angular-inviewport';
 
-import { ImageLoaderComponent } from './image-loader.component';
+import { ImageLoaderComponent } from './image-loader/image-loader.component';
 
 /**
  * A simple progressive/responsive/lazy loading image library for
@@ -10,8 +10,6 @@ import { ImageLoaderComponent } from './image-loader.component';
  * image only when the element is in view.
  * This package requires @thisissoon/angular-inviewport
  *
- * @export
- * @class ImageLoaderModule
  */
 @NgModule({
   imports: [

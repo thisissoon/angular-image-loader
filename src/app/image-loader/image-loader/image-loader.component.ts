@@ -12,16 +12,21 @@ import {
   ElementRef,
   NgZone
 } from '@angular/core';
-
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { takeUntil, debounceTime } from 'rxjs/operators';
 import { WindowRef } from '@thisissoon/angular-inviewport';
 
-import * as classes from './shared/classes';
-import * as events from './shared/events';
-import { ImageLoadedEvent, ResponsiveImage, RetinaImage, Size, Breakpoint } from './shared';
+import * as classes from '../shared/classes';
+import * as events from '../shared/events';
+import {
+  ImageLoadedEvent,
+  ResponsiveImage,
+  RetinaImage,
+  Size,
+  Breakpoint
+} from '../shared';
 
 /**
  * A component that renders a `img` element with the correct image url
@@ -39,11 +44,6 @@ import { ImageLoadedEvent, ResponsiveImage, RetinaImage, Size, Breakpoint } from
  * </sn-image-loader>
  * ```
  *
- * @export
- * @class ImageLoaderComponent
- * @implements {OnInit}
- * @implements {AfterViewInit}
- * @implements {OnDestroy}
  */
 @Component({
   selector: 'sn-image-loader',
@@ -53,46 +53,39 @@ import { ImageLoadedEvent, ResponsiveImage, RetinaImage, Size, Breakpoint } from
 export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * URL of image for `img` element to display
-   * @type {string}
    * @memberof ImageLoaderComponent
    */
   public src = '';
   /**
    * srcset string for `img` element
-   * @type {string}
    * @memberof ImageLoaderComponent
    */
   public srcset = '';
   /**
    * Alt tag for image
-   * @type {string}
    * @memberof ImageLoaderComponent
    */
   @Input()
   public alt = '';
   /**
    * Classes to pass on to image element
-   * @type {string}
    * @memberof ImageLoaderComponent
    */
   @Input()
   public imgClass = '';
   /**
    * URL of image to preload using a dummy image element
-   * @type {string}
    * @memberof ImageLoaderComponent
    */
   public preloadSrc = '';
   /**
    * srcset value of retina image to preload using a dummy image
    * element
-   * @type {string}
    * @memberof ImageLoaderComponent
    */
   public preloadSrcset = '';
   /**
    * List of image breakpoints
-   * @type {Breakpoint[]}
    * @memberof ImageLoaderComponent
    */
   @Input()
@@ -105,14 +98,12 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
   /**
    * Current size of image to display
-   * @type {Size}
    * @memberof ImageLoaderComponent
    */
   public size: Size = 'xs';
   /**
    * Set of images for different viewports
    *
-   * @type {ResponsiveImage}
    * @memberof ImageLoaderComponent
    */
   @Input()
@@ -120,14 +111,12 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * If true means the element is inside the browser viewport
    *
-   * @type {boolean}
    * @memberof ImageLoaderComponent
    */
   public inViewport: boolean;
   /**
    * Amount of time to wait after last event
    *
-   * @type {number}
    * @memberof ImageLoaderComponent
    */
   public debounce = 100;
@@ -135,28 +124,24 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * Completes on component destroy lifecycle event
    * use to handle unsubscription from infinite observables
    *
-   * @type {Subject<void>}
    * @memberof ImageLoaderComponent
    */
   public ngUnsubscribe$ = new Subject<void>();
   /**
    * Reference to dummy image element
    *
-   * @type {ElementRef}
    * @memberof ImageLoaderComponent
    */
   @ViewChild('dummyImg')
   public dummyImg: ElementRef;
   /**
    * If true it means the browser supports `srcset`
-   * @type {boolean}
    * @memberof ImageLoaderComponent
    */
   public supportsSrcSet = false;
   /**
    * Output for placeholder image loaded event.
    *
-   * @type {EventEmitter}
    * @memberof ImageLoaderComponent
    */
   @Output()
@@ -164,7 +149,6 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Output for full res image loaded event.
    *
-   * @type {EventEmitter}
    * @memberof ImageLoaderComponent
    */
   @Output()
@@ -173,7 +157,6 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * If true means the image has not been loaded yet and
    * the placeholder image is currently displayed
    *
-   * @type {boolean}
    * @memberof ImageLoaderComponent
    */
   @HostBinding(classes.loadedClass)
@@ -183,7 +166,6 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * the placeholder image is currently displayed
    *
    * @readonly
-   * @type {boolean}
    * @memberof ImageLoaderComponent
    */
   @HostBinding(classes.notLoadedClass)
@@ -232,7 +214,6 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * If element is in viewport preload image by setting the src
    * of the dummy image element.
    *
-   * @param {boolean} inViewport
    * @memberof ImageLoaderComponent
    */
   public onInViewportChange(inViewport: boolean): void {
@@ -243,7 +224,6 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * On width change, determine if device has changed and
    * reset directive
    *
-   * @param {number} width
    * @memberof ImageLoaderComponent
    */
   public onWidthChange(width: number): void {

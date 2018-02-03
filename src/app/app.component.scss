@@ -19,3 +19,7 @@
 :host ::ng-deep .sn-image-loaded .img {
   filter: blur(0px);
 }
+
+:host ::ng-deep .video {
+  width: 100%;
+}
