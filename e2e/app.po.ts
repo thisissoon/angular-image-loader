@@ -12,6 +12,10 @@ export class AppPage {
         .then((posY) => posY === y));
   }
 
+  scrollToBottom() {
+    browser.executeScript(`return window.scrollTo(0, document.documentElement.offsetHeight);`);
+  }
+
   setWindowSize(x: number, y: number) {
     browser.driver.manage().window().setSize(x, y);
     return browser.wait(() =>
@@ -21,6 +25,10 @@ export class AppPage {
 
   getWindowSize() {
     return browser.executeScript(`return { height: window.outerHeight, width: window.outerWidth };`);
+  }
+
+  getDocumentHeight() {
+    return browser.executeScript(`return document.documentElement.offsetHeight;`);
   }
 
   getScrollYPosition() {
@@ -61,5 +69,26 @@ export class AppPage {
 
   getBottomFullResCountElement() {
     return element(by.css('.full-res-count'));
+  }
+
+  getVideoElement() {
+    return element(by.css('sn-video-loader'));
+  }
+
+  getVideoSrc() {
+    return element(by.css('sn-video-loader video')).getAttribute('src');
+  }
+
+  getVideoElementClass() {
+    return this.getVideoElement().getAttribute('class');
+  }
+
+  isVideoLoaded() {
+    return this.getVideoElementClass()
+      .then((result: string) => result.includes('sn-video-loaded'));
+  }
+
+  waitForVideoLoaded() {
+    return browser.wait(() => this.isVideoLoaded());
   }
 }
