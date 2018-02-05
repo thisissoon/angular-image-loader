@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/thisissoon/angular-image-loader/compare/v2.0.2...v3.0.0) (2018-02-05)
+
+
+### Bug Fixes
+
+* **ImageLoader:** fixing imports so all symbols can be imported from [@thisissoon](https://github.com/thisissoon)/angular-image-loade ([228276b](https://github.com/thisissoon/angular-image-loader/commit/228276b))
+* **VideoLoader:** fixing *ngIf breaking inviewport logic ([08f8d2f](https://github.com/thisissoon/angular-image-loader/commit/08f8d2f))
+
+
+### Features
+
+* **VideoLoader:** adding Video loader module for responsive videos ([453c0c0](https://github.com/thisissoon/angular-image-loader/commit/453c0c0))
+
+
+### Performance Improvements
+
+* **ImageLoader:** use rxjs from event instead of angular HostBinding api ([37a7f86](https://github.com/thisissoon/angular-image-loader/commit/37a7f86))
+
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/thisissoon/angular-image-loader/compare/v2.0.1...v2.0.2) (2018-01-25)
 
