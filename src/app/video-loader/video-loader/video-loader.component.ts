@@ -11,12 +11,9 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
 import { takeUntil, debounceTime } from 'rxjs/operators';
 import { WindowRef } from '@thisissoon/angular-inviewport';
 
-import {
-  ResponsiveImage,
-  Breakpoint,
-  Size
-} from '../../image-loader';
-import { ResponsiveVideo } from '../shared';
+import { ResponsiveImage, Size } from '../../image-loader/shared/image.model';
+import { Breakpoint } from '../../image-loader/shared/breakpoint.model';
+import { ResponsiveVideo } from '../shared/video.model';
 import * as classes from '../shared/classes';
 import * as events from '../../image-loader/shared/events';
 

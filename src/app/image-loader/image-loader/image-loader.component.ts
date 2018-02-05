@@ -20,13 +20,13 @@ import { WindowRef } from '@thisissoon/angular-inviewport';
 
 import * as classes from '../shared/classes';
 import * as events from '../shared/events';
+import { ImageLoadedEvent } from '../shared/image-loaded-event.model';
+import { Breakpoint } from '../shared/breakpoint.model';
 import {
-  ImageLoadedEvent,
   ResponsiveImage,
   RetinaImage,
-  Size,
-  Breakpoint
-} from '../shared';
+  Size
+} from '../shared/image.model';
 
 /**
  * A component that renders a `img` element with the correct image url

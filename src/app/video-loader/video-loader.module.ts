@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InViewportModule } from '@thisissoon/angular-inviewport';
 
-import { ImageLoaderModule } from '../image-loader';
+import { ImageLoaderModule } from '../image-loader/image-loader.module';
 import { VideoLoaderComponent } from './video-loader/video-loader.component';
 
 /**

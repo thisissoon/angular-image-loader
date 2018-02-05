@@ -1,4 +1,4 @@
-import { Size, ResponsiveImage } from '../../image-loader';
+import { Size, ResponsiveImage } from '../../image-loader/shared/image.model';
 
 export interface ResponsiveVideo {
   videos: Video[];
