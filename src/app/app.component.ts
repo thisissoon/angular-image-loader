@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
-import { ResponsiveImage, Breakpoint, Size } from './image-loader';
-import { ImageLoadedEvent } from './image-loader/shared';
-import { ResponsiveVideo } from './video-loader/shared';
+import { Breakpoint } from './image-loader/shared/breakpoint.model';
+import { ResponsiveImage, Size } from './image-loader/shared/image.model';
+import { ImageLoadedEvent } from './image-loader/shared/image-loaded-event.model';
+import { ResponsiveVideo } from './video-loader/shared/video.model';
 import { video, image, sizes } from './app-data';
 
 @Component({

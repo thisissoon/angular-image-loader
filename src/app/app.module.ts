@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Provider } from '@angular/core';
 import { InViewportModule, WindowRef } from '@thisissoon/angular-inviewport';
 
-import { ImageLoaderModule } from './image-loader';
-import { VideoLoaderModule } from './video-loader';
+import { ImageLoaderModule } from './image-loader/image-loader.module';
+import { VideoLoaderModule } from './video-loader/video-loader.module';
 import { AppComponent } from './app.component';
 
 export const getWindow = () => window;

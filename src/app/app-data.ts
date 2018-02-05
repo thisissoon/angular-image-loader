@@ -1,5 +1,6 @@
-import { ResponsiveVideo } from './video-loader';
-import { ResponsiveImage, Breakpoint } from './image-loader';
+import { ResponsiveVideo } from './video-loader/shared/video.model';
+import { ResponsiveImage } from './image-loader/shared/image.model';
+import { Breakpoint } from './image-loader/shared/breakpoint.model';
 
 export const image: ResponsiveImage = {
   placeholder: 'http://via.placeholder.com/40x40?text=placeholder',
