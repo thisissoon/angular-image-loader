@@ -51,6 +51,10 @@ export class AppPage {
     return element(by.css('.sn-image-loader--bottom .img'));
   }
 
+  getImageBottomElementSrcSet() {
+    return this.getImageBottomElement().getAttribute('srcset');
+  }
+
   getLoadedImageBottomElement() {
     return element(by.css('.sn-image-loader--bottom.sn-image-loaded')).isPresent();
   }
@@ -86,6 +90,10 @@ export class AppPage {
   isVideoLoaded() {
     return this.getVideoElementClass()
       .then((result: string) => result.includes('sn-video-loaded'));
+  }
+
+  waitForImageBottomElementLoaded() {
+    browser.wait(() => this.getLoadedImageBottomElement());
   }
 
   waitForVideoLoaded() {

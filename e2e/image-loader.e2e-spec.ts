@@ -1,5 +1,6 @@
 import { AppPage } from './app.po';
 import { browser } from 'protractor';
+import { image } from '../src/app/app-data';
 
 describe('ImageLoader Lib E2E Tests', function () {
   let page: AppPage;
@@ -84,47 +85,46 @@ describe('ImageLoader Lib E2E Tests', function () {
     it('should load correct image for "xs" device size', () => {
       page.setWindowSize(400, 580);
       page.scrollTo(0, 580 * 2);
-      browser.wait(() => page.getLoadedImageBottomElement());
-      const imageLoaderCompClass = page.getImageBottomLoaderComp().getAttribute('class');
-      const imgSrc = page.getImageBottomElement().getAttribute('srcset');
-      expect(imageLoaderCompClass).toContain('sn-image-loaded');
-      expect(imgSrc).toEqual('http://via.placeholder.com/400x400?text=xs+1x 1x, http://via.placeholder.com/800x800?text=xs+2x 2x');
+      page.waitForImageBottomElementLoaded();
+
+      expect(page.getLoadedImageBottomElement()).toBeTruthy();
+      expect(page.getImageBottomElementSrcSet()).toEqual(`${image.images[0].x1} 1x, ${image.images[0].x2} 2x`);
     });
 
     it('should load correct image for "md" device size', () => {
       page.setWindowSize(768, 580);
       page.scrollTo(0, 580 * 2.5);
-      browser.wait(() => page.getLoadedImageBottomElement());
+      page.waitForImageBottomElementLoaded();
 
-      const imgSrc = page.getImageBottomElement().getAttribute('srcset');
-      expect(imgSrc).toEqual('http://via.placeholder.com/768x400?text=md+1x 1x, http://via.placeholder.com/1536x800?text=md+2x 2x');
+      expect(page.getLoadedImageBottomElement()).toBeTruthy();
+      expect(page.getImageBottomElementSrcSet()).toEqual(`${image.images[1].x1} 1x, ${image.images[1].x2} 2x`);
     });
 
     it('should load correct image for "lg" device size', () => {
       page.setWindowSize(1024, 580);
       page.scrollTo(0, 580 * 2.5);
-      browser.wait(() => page.getLoadedImageBottomElement());
+      page.waitForImageBottomElementLoaded();
 
-      const imgSrc = page.getImageBottomElement().getAttribute('srcset');
-      expect(imgSrc).toEqual('http://via.placeholder.com/1024x400?text=lg+1x 1x, http://via.placeholder.com/2048x800?text=lg+2x 2x');
+      expect(page.getLoadedImageBottomElement()).toBeTruthy();
+      expect(page.getImageBottomElementSrcSet()).toEqual(`${image.images[2].x1} 1x, ${image.images[2].x2} 2x`);
     });
 
     it('should update image loaded event count on window resize when image in viewport', () => {
       expect(page.getBottomFullResCountElement().getText()).toEqual('0');
 
       page.setWindowSize(400, 580);
-      page.scrollTo(0, 580 * 3);
-      browser.wait(() => page.getLoadedImageBottomElement());
+      page.scrollTo(0, 580 * 2.5);
+      page.waitForImageBottomElementLoaded();
       expect(page.getBottomFullResCountElement().getText()).toEqual('1');
 
       page.setWindowSize(768, 580);
       page.scrollTo(0, 580 * 3);
-      browser.wait(() => page.getLoadedImageBottomElement());
+      page.waitForImageBottomElementLoaded();
       expect(page.getBottomFullResCountElement().getText()).toEqual('2');
 
       page.setWindowSize(1024, 580);
       page.scrollTo(0, 580 * 3);
-      browser.wait(() => page.getLoadedImageBottomElement());
+      page.waitForImageBottomElementLoaded();
       expect(page.getBottomFullResCountElement().getText()).toEqual('3');
     });
 
