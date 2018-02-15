@@ -12,8 +12,23 @@ export class AppPage {
         .then((posY) => posY === y));
   }
 
-  scrollToBottom() {
-    browser.executeScript(`return window.scrollTo(0, document.documentElement.offsetHeight);`);
+  scrollIntoView(selector: string) {
+    return browser.executeScript(`return document.querySelector('${selector}').scrollIntoView()`);
+  }
+
+  scrollToImageTopElement() {
+    this.scrollIntoView('.sn-image-loader--top');
+    return this.waitForImageTopElementLoaded();
+  }
+
+  scrollToImageBottomElement() {
+    this.scrollIntoView('.sn-image-loader--bottom');
+    return this.waitForImageBottomElementLoaded();
+  }
+
+  scrollToVideoElement() {
+    this.scrollIntoView('sn-video-loader');
+    return this.waitForVideoLoaded();
   }
 
   setWindowSize(x: number, y: number) {
@@ -25,10 +40,6 @@ export class AppPage {
 
   getWindowSize() {
     return browser.executeScript(`return { height: window.outerHeight, width: window.outerWidth };`);
-  }
-
-  getDocumentHeight() {
-    return browser.executeScript(`return document.documentElement.offsetHeight;`);
   }
 
   getScrollYPosition() {
@@ -43,6 +54,15 @@ export class AppPage {
     return element(by.css('.sn-image-loader--bottom'));
   }
 
+
+  getImageTopLoaderCompClass() {
+    return this.getImageTopLoaderComp().getAttribute('class');
+  }
+
+  getImageBottomLoaderCompClass() {
+    return this.getImageBottomLoaderComp().getAttribute('class');
+  }
+
   getImageTopElement() {
     return element(by.css('.sn-image-loader--top .img'));
   }
@@ -51,28 +71,36 @@ export class AppPage {
     return element(by.css('.sn-image-loader--bottom .img'));
   }
 
+  getImageTopElementSrc() {
+    return this.getImageTopElement().getAttribute('src');
+  }
+
+  getImageTopElementSrcSet() {
+    return this.getImageTopElement().getAttribute('srcset');
+  }
+
+  getImageBottomElementSrc() {
+    return this.getImageBottomElement().getAttribute('src');
+  }
+
   getImageBottomElementSrcSet() {
     return this.getImageBottomElement().getAttribute('srcset');
   }
 
-  getLoadedImageBottomElement() {
-    return element(by.css('.sn-image-loader--bottom.sn-image-loaded')).isPresent();
+  getImageBottomPlaceholderLoadedElement() {
+    return element(by.css('.placeholder-loaded'));
   }
 
-  getLoadedImageTopElement() {
-    return element(by.css('.sn-image-loader--top.sn-image-loaded')).isPresent();
+  getImageBottomPlaceholderLoadedElementText() {
+    return this.getImageBottomPlaceholderLoadedElement().getText();
   }
 
-  getLoadedImageElementBySrcSet(srcSet) {
-    return element(by.css(`.img--bottom[srcSet="${srcSet}"]`)).isPresent();
+  getImageBottomLoadedCountElement() {
+    return element(by.css('.image-loaded-count'));
   }
 
-  getBottomPlaceholderBooleanElement() {
-    return element(by.css('.placeholder-boolean'));
-  }
-
-  getBottomFullResCountElement() {
-    return element(by.css('.full-res-count'));
+  getImageBottomLoadedCountElementText() {
+    return this.getImageBottomLoadedCountElement().getText();
   }
 
   getVideoElement() {
@@ -87,13 +115,27 @@ export class AppPage {
     return this.getVideoElement().getAttribute('class');
   }
 
+  isImageTopLoaded() {
+    return this.getImageTopLoaderCompClass()
+      .then((result: string) => result.includes('sn-image-loaded'));
+  }
+
+  isImageBottomLoaded() {
+    return this.getImageBottomLoaderCompClass()
+      .then((result: string) => result.includes('sn-image-loaded'));
+  }
+
   isVideoLoaded() {
     return this.getVideoElementClass()
       .then((result: string) => result.includes('sn-video-loaded'));
   }
 
+  waitForImageTopElementLoaded() {
+    browser.wait(() => this.isImageTopLoaded());
+  }
+
   waitForImageBottomElementLoaded() {
-    browser.wait(() => this.getLoadedImageBottomElement());
+    browser.wait(() => this.isImageBottomLoaded());
   }
 
   waitForVideoLoaded() {

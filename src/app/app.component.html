@@ -8,7 +8,7 @@
 </sn-image-loader>
 
 <h1>Scroll down for bottom image ↓</h1>
-<h3>Bottom placeholder loaded: <span class="placeholder-boolean">{{ placeholderLoaded }}</span></h3>
+<h3>Bottom placeholder loaded: <span class="placeholder-loaded">{{ placeholderLoaded }}</span></h3>
 <div class="spacer"></div>
 
 <h3>Bottom image</h3>
@@ -21,7 +21,7 @@
   (imageLoaded)="onImageLoad($event)"
   class="sn-image-loader sn-image-loader--bottom">
 </sn-image-loader>
-<h3>Bottom image imageLoaded event count: <span class="full-res-count">{{ imageLoadedEventCount }}</span></h3>
+<h3>Bottom image imageLoaded event count: <span class="image-loaded-count">{{ imageLoadedEventCount }}</span></h3>
 <div class="spacer"></div>
 
 <sn-video-loader

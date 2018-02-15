@@ -5,8 +5,6 @@ import { image } from '../src/app/app-data';
 describe('ImageLoader Lib E2E Tests', function () {
   let page: AppPage;
 
-  const browserWaitTimeout = 10000;
-
   beforeEach(() => {
     page = new AppPage();
     page.navigateTo();
@@ -26,27 +24,30 @@ describe('ImageLoader Lib E2E Tests', function () {
   describe('placeholder image', () => {
     beforeEach(() => page.setWindowSize(400, 580));
 
-    it('should load placeholder image', () => {
-      expect(page.getImageBottomElement().getAttribute('src')).toEqual('http://via.placeholder.com/40x40?text=placeholder');
+    it('should set src to placeholder image', () => {
+      const result = page.getImageBottomElementSrc();
+      const expected = image.placeholder;
+      expect(result).toEqual(expected);
     });
 
-    it('should update placeholder loaded boolean on init', () => {
-      expect(page.getBottomPlaceholderBooleanElement().getText()).toEqual('true');
+    it('should set placeholder loaded text to true on init', () => {
+      const result = page.getImageBottomPlaceholderLoadedElementText();
+      const expected = 'true';
+      expect(result).toEqual(expected);
     });
   });
 
-  describe('inviewport image on load', () => {
+  describe('image in viewport on page load', () => {
     beforeEach(() => page.setWindowSize(400, 580));
 
-    it('should load full res image if image is in viewport on page load', () => {
-      browser.wait(() => page.getLoadedImageTopElement());
+    it('should load image when in viewport on page load', () => {
+      page.waitForImageTopElementLoaded();
 
-      const imageLoaderCompClass = page.getImageTopLoaderComp().getAttribute('class');
-      const imgSrc = page.getImageTopElement().getAttribute('srcset');
-      expect(imageLoaderCompClass).toContain('sn-image-loaded');
-      expect(imgSrc).toEqual('http://via.placeholder.com/400x400?text=xs+1x 1x, http://via.placeholder.com/800x800?text=xs+2x 2x');
-
-
+      const resultLoaded = page.isImageTopLoaded();
+      const resultSrcset = page.getImageTopElementSrcSet();
+      const expectedSrcset = `${image.images[0].x1} 1x, ${image.images[0].x2} 2x`;
+      expect(resultLoaded).toBeTruthy();
+      expect(resultSrcset).toEqual(expectedSrcset);
     });
 
   });
@@ -55,27 +56,28 @@ describe('ImageLoader Lib E2E Tests', function () {
     beforeEach(() => page.setWindowSize(400, 580));
 
     it('should load image when scrolled into viewport', () => {
-      let imageLoaderCompClass = page.getImageBottomLoaderComp().getAttribute('class');
-      let imgSrc = page.getImageBottomElement().getAttribute('src');
-      expect(imageLoaderCompClass).toContain('sn-image-not-loaded');
-      expect(imgSrc).toEqual('http://via.placeholder.com/40x40?text=placeholder');
+      let resultLoaded = page.isImageBottomLoaded();
+      let expectedLoaded = false;
+      let resultSrc = page.getImageBottomElementSrc();
+      let expectedSrc = image.placeholder;
+      expect(resultLoaded).toEqual(expectedLoaded);
+      expect(resultSrc).toEqual(expectedSrc);
 
-      page.scrollTo(0, 580 * 2);
-      browser.wait(() => page.getLoadedImageBottomElement());
+      page.scrollToImageBottomElement();
 
-      imageLoaderCompClass = page.getImageBottomLoaderComp().getAttribute('class');
-      imgSrc = page.getImageBottomElement().getAttribute('srcset');
-      expect(imageLoaderCompClass).toContain('sn-image-loaded');
-      expect(imgSrc).toEqual('http://via.placeholder.com/400x400?text=xs+1x 1x, http://via.placeholder.com/800x800?text=xs+2x 2x');
+      resultLoaded = page.isImageBottomLoaded();
+      expectedLoaded = true;
+      resultSrc = page.getImageBottomElementSrc();
+      expectedSrc = image.images[0].x1;
+      expect(resultLoaded).toEqual(expectedLoaded);
+      expect(resultSrc).toEqual(expectedSrc);
 
     });
 
-    it('should update full res image event count scroll into viewport', () => {
-      expect(page.getBottomFullResCountElement().getText()).toEqual('0');
-
-      page.scrollTo(0, 580 * 2);
-      browser.wait(() => page.getLoadedImageBottomElement());
-      expect(page.getBottomFullResCountElement().getText()).toEqual('1');
+    it('should update image loaded count element when image scrolled into viewport', () => {
+      expect(page.getImageBottomLoadedCountElementText()).toEqual('0');
+      page.scrollToImageBottomElement();
+      expect(page.getImageBottomLoadedCountElementText()).toEqual('1');
     });
 
   });
@@ -84,48 +86,65 @@ describe('ImageLoader Lib E2E Tests', function () {
 
     it('should load correct image for "xs" device size', () => {
       page.setWindowSize(400, 580);
-      page.scrollTo(0, 580 * 2);
-      page.waitForImageBottomElementLoaded();
+      page.scrollToImageBottomElement();
 
-      expect(page.getLoadedImageBottomElement()).toBeTruthy();
-      expect(page.getImageBottomElementSrcSet()).toEqual(`${image.images[0].x1} 1x, ${image.images[0].x2} 2x`);
+      const resultLoaded = page.isImageBottomLoaded();
+      const expectedLoaded = true;
+      const resultSrcset = page.getImageBottomElementSrcSet();
+      const expectedSrcset = `${image.images[0].x1} 1x, ${image.images[0].x2} 2x`;
+
+      expect(resultLoaded).toEqual(expectedLoaded);
+      expect(resultSrcset).toEqual(expectedSrcset);
     });
 
     it('should load correct image for "md" device size', () => {
       page.setWindowSize(768, 580);
-      page.scrollTo(0, 580 * 2.5);
-      page.waitForImageBottomElementLoaded();
+      page.scrollToImageBottomElement();
 
-      expect(page.getLoadedImageBottomElement()).toBeTruthy();
-      expect(page.getImageBottomElementSrcSet()).toEqual(`${image.images[1].x1} 1x, ${image.images[1].x2} 2x`);
+      const resultLoaded = page.isImageBottomLoaded();
+      const expectedLoaded = true;
+      const resultSrcset = page.getImageBottomElementSrcSet();
+      const expectedSrcset = `${image.images[1].x1} 1x, ${image.images[1].x2} 2x`;
+
+      expect(resultLoaded).toEqual(expectedLoaded);
+      expect(resultSrcset).toEqual(expectedSrcset);
     });
 
     it('should load correct image for "lg" device size', () => {
       page.setWindowSize(1024, 580);
-      page.scrollTo(0, 580 * 2.5);
-      page.waitForImageBottomElementLoaded();
+      page.scrollToImageBottomElement();
 
-      expect(page.getLoadedImageBottomElement()).toBeTruthy();
-      expect(page.getImageBottomElementSrcSet()).toEqual(`${image.images[2].x1} 1x, ${image.images[2].x2} 2x`);
+      const resultLoaded = page.isImageBottomLoaded();
+      const expectedLoaded = true;
+      const resultSrcset = page.getImageBottomElementSrcSet();
+      const expectedSrcset = `${image.images[2].x1} 1x, ${image.images[2].x2} 2x`;
+
+      expect(resultLoaded).toEqual(expectedLoaded);
+      expect(resultSrcset).toEqual(expectedSrcset);
     });
 
     it('should update image loaded event count on window resize when image in viewport', () => {
-      expect(page.getBottomFullResCountElement().getText()).toEqual('0');
+      let result = page.getImageBottomLoadedCountElementText();
+      let expected = '0';
+      expect(result).toEqual(expected);
 
       page.setWindowSize(400, 580);
-      page.scrollTo(0, 580 * 2.5);
-      page.waitForImageBottomElementLoaded();
-      expect(page.getBottomFullResCountElement().getText()).toEqual('1');
+      page.scrollToImageBottomElement();
+      result = page.getImageBottomLoadedCountElementText();
+      expected = '1';
+      expect(result).toEqual(expected);
 
       page.setWindowSize(768, 580);
-      page.scrollTo(0, 580 * 3);
-      page.waitForImageBottomElementLoaded();
-      expect(page.getBottomFullResCountElement().getText()).toEqual('2');
+      page.scrollToImageBottomElement();
+      result = page.getImageBottomLoadedCountElementText();
+      expected = '2';
+      expect(result).toEqual(expected);
 
       page.setWindowSize(1024, 580);
-      page.scrollTo(0, 580 * 3);
-      page.waitForImageBottomElementLoaded();
-      expect(page.getBottomFullResCountElement().getText()).toEqual('3');
+      page.scrollToImageBottomElement();
+      result = page.getImageBottomLoadedCountElementText();
+      expected = '3';
+      expect(result).toEqual(expected);
     });
 
   });
