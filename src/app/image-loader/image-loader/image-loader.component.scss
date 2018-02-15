@@ -1,9 +1,7 @@
 .sn-img-dummy {
-  display: block;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: -999rem;
+  opacity: 0;
+  height: 0;
+  width: 0;
   visibility: hidden;
-  z-index: -9999;
+  display: block;
 }

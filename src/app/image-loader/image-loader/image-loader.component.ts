@@ -132,8 +132,8 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    *
    * @memberof ImageLoaderComponent
    */
-  @ViewChild('dummyImg')
-  public dummyImg: ElementRef;
+  @ViewChild('img')
+  public img: ElementRef;
   /**
    * If true it means the browser supports `srcset`
    * @memberof ImageLoaderComponent
@@ -255,7 +255,7 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
       const retinaImg = this.image.images.find(retinaImage => retinaImage.size === this.size);
       const imageNormal = retinaImg.x1;
       const imageRetina = retinaImg.x2;
-      if ('srcset' in this.dummyImg.nativeElement) {
+      if ('srcset' in this.img.nativeElement) {
         this.supportsSrcSet = true;
       }
       this.preloadSrcset = `${imageNormal} 1x, ${imageRetina} 2x`;

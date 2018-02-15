@@ -1,5 +1,5 @@
 <img
-  *ngIf="image"
+  #img
   [src]="src"
   [srcset]="srcset"
   [alt]="alt"
@@ -10,7 +10,7 @@
   (load)="onImageLoad($event)">
 
 <img
-  #dummyImg
+  *ngIf="preloadSrc.length || preloadSrcset.length"
   class="sn-img-dummy"
   [srcset]="preloadSrcset"
   [src]="preloadSrc"

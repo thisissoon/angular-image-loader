@@ -138,7 +138,7 @@ describe('ImageLoaderComponent', () => {
     component.supportsSrcSet = false;
     component.size = 'xs';
     component.loaded = false;
-    component.dummyImg.nativeElement = { src: null };
+    component.img.nativeElement = { src: null };
     component.preloadImage();
     expect(component.preloadSrc).toEqual('http://via.placeholder.com/150x350?text=xs+1x');
 
@@ -153,7 +153,7 @@ describe('ImageLoaderComponent', () => {
     component.supportsSrcSet = false;
     component.size = 'xs';
     component.loaded = false;
-    component.dummyImg.nativeElement = { src: null };
+    component.img.nativeElement = { src: null };
     component.preloadImage();
     expect(component.preloadSrc).toEqual('http://via.placeholder.com/150x350?text=xs+1x');
 
