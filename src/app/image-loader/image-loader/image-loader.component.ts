@@ -252,15 +252,14 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   public preloadImage(): void {
     if (this.inViewport && this.notLoaded) {
-      const retinaImg = this.image.images.filter(retinaImage => retinaImage.size === this.size)[0];
+      const retinaImg = this.image.images.find(retinaImage => retinaImage.size === this.size);
       const imageNormal = retinaImg.x1;
       const imageRetina = retinaImg.x2;
       if ('srcset' in this.dummyImg.nativeElement) {
         this.supportsSrcSet = true;
       }
-      this.supportsSrcSet ?
-        this.preloadSrcset = `${imageNormal} 1x, ${imageRetina} 2x` :
-        this.preloadSrc = `${imageNormal}`;
+      this.preloadSrcset = `${imageNormal} 1x, ${imageRetina} 2x`;
+      this.preloadSrc = imageNormal;
     }
   }
   /**
@@ -270,13 +269,13 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof ImageLoaderComponent
    */
   public onImagePreload(): void {
-    const retinaImg = this.image.images.filter(retinaImage => retinaImage.size === this.size)[0];
+    const retinaImg = this.image.images.find(retinaImage => retinaImage.size === this.size);
     const imageNormal = retinaImg.x1;
     const imageRetina = retinaImg.x2;
-    this.supportsSrcSet ?
-      this.srcset = `${imageNormal} 1x, ${imageRetina} 2x` :
-      this.src = this.preloadSrc;
+    this.srcset = `${imageNormal} 1x, ${imageRetina} 2x`;
+    this.src = imageNormal;
     this.preloadSrc = '';
+    this.preloadSrcset = '';
     this.loaded = true;
   }
   /**

@@ -4,11 +4,12 @@ import {
   HostBinding,
   NgZone,
   AfterViewInit,
-  OnDestroy
+  OnDestroy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { fromEvent } from 'rxjs/observable/fromEvent';
-import { takeUntil, debounceTime } from 'rxjs/operators';
+import { takeUntil, debounceTime, startWith } from 'rxjs/operators';
 import { WindowRef } from '@thisissoon/angular-inviewport';
 
 import { ResponsiveImage, Size } from '../../image-loader/shared/image.model';
@@ -16,6 +17,7 @@ import { Breakpoint } from '../../image-loader/shared/breakpoint.model';
 import { ResponsiveVideo } from '../shared/video.model';
 import * as classes from '../shared/classes';
 import * as events from '../../image-loader/shared/events';
+import { ImageLoadedEvent } from '../../image-loader/shared/image-loaded-event.model';
 
 
 /**
@@ -148,6 +150,12 @@ export class VideoLoaderComponent implements AfterViewInit, OnDestroy {
   @Input()
   public posterClass = '';
   /**
+   * Value for video poster property
+   *
+   * @memberof VideoLoaderComponent
+   */
+  public poster = '';
+  /**
    * Completes on component destroy lifecycle event
    * use to handle unsubscription from infinite observables
    *
@@ -179,7 +187,8 @@ export class VideoLoaderComponent implements AfterViewInit, OnDestroy {
     */
   constructor(
     private windowRef: WindowRef,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private cdRef: ChangeDetectorRef
   ) { }
   /**
    * Subscribe to `resize` window event observable
@@ -188,13 +197,13 @@ export class VideoLoaderComponent implements AfterViewInit, OnDestroy {
    * @memberof VideoLoaderComponent
    */
   public ngAfterViewInit(): void {
-    this.onWidthChange(this.windowRef.innerWidth);
     // Listen for window scroll/resize events.
     this.ngZone.runOutsideAngular(() => {
       fromEvent(this.windowRef as any, events.eventResize)
-        .pipe(
+      .pipe(
           takeUntil(this.ngUnsubscribe$),
-          debounceTime(this.debounce)
+          debounceTime(this.debounce),
+          startWith({ target: { innerWidth: this.windowRef.innerWidth } })
         )
         .subscribe((event: any) =>
           this.ngZone.run(() => this.onWidthChange(event.target.innerWidth))
@@ -226,6 +235,14 @@ export class VideoLoaderComponent implements AfterViewInit, OnDestroy {
     }
   }
   /**
+   * Set poster on image load
+   *
+   * @memberof VideoLoaderComponent
+   */
+  public onImageLoad($event: ImageLoadedEvent): void {
+    this.poster = $event.src;
+  }
+  /**
    * Set loaded to true when video has been loaded
    *
    * @memberof VideoLoaderComponent
@@ -244,6 +261,7 @@ export class VideoLoaderComponent implements AfterViewInit, OnDestroy {
       const video = this.video.videos.find(item => item.size === this.size);
       this.loaded = false;
       this.src = video.url;
+      this.cdRef.detectChanges();
     }
   }
   /**

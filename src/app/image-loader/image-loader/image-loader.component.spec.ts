@@ -172,11 +172,18 @@ describe('ImageLoaderComponent', () => {
   });
 
   it('should emit a full res loaded event on image load when loaded is true', () => {
+    component.src = image.images[0].x1;
+    component.srcset = `${image.images[0].x1} x1, ${image.images[0].x2} x2`;
     const spy = spyOn(component.imageLoaded, 'emit');
     component.loaded = true;
     const imageElement = fixture.debugElement.query(By.css('img'));
-    imageElement.triggerEventHandler('load', null);
-    expect(spy).toHaveBeenCalled();
+    const event = new Event('load');
+    imageElement.triggerEventHandler('load', event);
+    expect(spy).toHaveBeenCalledWith({
+      $event: event,
+      src: component.src,
+      srcset: component.srcset
+    });
   });
 
   it('should complete observable', () => {

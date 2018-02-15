@@ -93,4 +93,11 @@ describe('VideoLoaderComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
+  it('should set poster src', () => {
+    const event = { src: 'foo' };
+    component.poster = '';
+    component.onImageLoad(event as any);
+    expect(component.poster).toEqual('foo');
+  });
+
 });
