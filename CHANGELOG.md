@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/thisissoon/angular-image-loader/compare/v3.0.1...v3.1.0) (2018-02-15)
+
+
+### Bug Fixes
+
+* **VideoLoader:** fix poster value throwing change detection error ([e8d702f](https://github.com/thisissoon/angular-image-loader/commit/e8d702f))
+
+
+### Features
+
+* **ImageLoader:** remove dummy element after image load ([c3ef408](https://github.com/thisissoon/angular-image-loader/commit/c3ef408))
+
+
+
 <a name="3.0.1"></a>
 ## [3.0.1](https://github.com/thisissoon/angular-image-loader/compare/v3.0.0...v3.0.1) (2018-02-05)
 
