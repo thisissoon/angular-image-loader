@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { WindowRef } from '@thisissoon/angular-inviewport';
+import { InViewportModule } from '@thisissoon/angular-inviewport';
 
 import { VideoLoaderComponent } from './video-loader.component';
 import { video, sizes } from '../../app-data';
@@ -11,7 +11,7 @@ describe('VideoLoaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [WindowRef],
+      imports: [InViewportModule.forRoot()],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
       declarations: [ VideoLoaderComponent ]
     })
@@ -98,6 +98,12 @@ describe('VideoLoaderComponent', () => {
     component.poster = '';
     component.onImageLoad(event as any);
     expect(component.poster).toEqual('foo');
+  });
+
+  it('should check inviewport status', () => {
+    const spy = spyOn(component.videoEl, 'calculateInViewportStatus');
+    component.checkInViewportStatus();
+    expect(spy).toHaveBeenCalled();
   });
 
 });

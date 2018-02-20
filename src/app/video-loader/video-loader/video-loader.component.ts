@@ -3,6 +3,7 @@ import {
   Input,
   HostBinding,
   NgZone,
+  ViewChild,
   AfterViewInit,
   OnDestroy,
   ChangeDetectorRef
@@ -10,7 +11,7 @@ import {
 import { Subject } from 'rxjs/Subject';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { takeUntil, debounceTime, startWith } from 'rxjs/operators';
-import { WindowRef } from '@thisissoon/angular-inviewport';
+import { WindowRef, InViewportDirective } from '@thisissoon/angular-inviewport';
 
 import { ResponsiveImage, Size } from '../../image-loader/shared/image.model';
 import { Breakpoint } from '../../image-loader/shared/breakpoint.model';
@@ -100,6 +101,14 @@ export class VideoLoaderComponent implements AfterViewInit, OnDestroy {
    */
   @Input()
   public playsInline: boolean;
+  /**
+   * Reference to inviewport directive instance
+   *
+   * @type {InViewportDirective}
+   * @memberof VideoLoaderComponent
+   */
+  @ViewChild('videoEl')
+  public videoEl: InViewportDirective;
   /**
    * List of breakpoints to select video from
    *
@@ -219,6 +228,14 @@ export class VideoLoaderComponent implements AfterViewInit, OnDestroy {
   public onInViewportChange(inViewport: boolean): void {
     this.inViewport = inViewport;
     this.loadVideo();
+  }
+  /**
+   * Checks if video element is in viewport
+   *
+   * @memberof VideoLoaderComponent
+   */
+  public checkInViewportStatus(): void {
+    this.videoEl.calculateInViewportStatus();
   }
   /**
    * On width change, determine if device has changed and

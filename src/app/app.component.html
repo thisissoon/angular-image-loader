@@ -34,5 +34,8 @@
   [playsInline]="true"
   type="video/mp4"
   videoClass="video"
-  posterClass="img">
+  posterClass="img"
+  #videoEl>
 </sn-video-loader>
+
+<button (click)="videoEl.checkInViewportStatus()">Check</button>

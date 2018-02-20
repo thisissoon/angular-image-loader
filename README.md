@@ -186,6 +186,27 @@ export class AppComponent {
 ```
 
 
+### Check inviewport status manually
+
+```html
+<sn-video-loader
+  [sizes]="sizes"
+  [video]="video"
+  [loop]="true"
+  [muted]="true"
+  [autoplay]="true"
+  [controls]="true"
+  [playsInline]="true"
+  type="video/mp4"
+  videoClass="video"
+  posterClass="img"
+  #videoEl>
+</sn-video-loader>
+
+<button (click)="videoEl.checkInViewportStatus()">Check status</button>
+```
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
