@@ -26,7 +26,7 @@ import { ImageLoadedEvent } from '../../image-loader/shared/image-loaded-event.m
  * video and poster for the device size
  *
  * @example
- * ```
+ * ```html
  * <sn-video-loader
  *   [sizes]="sizes"
  *   [video]="video"
@@ -104,11 +104,9 @@ export class VideoLoaderComponent implements AfterViewInit, OnDestroy {
   /**
    * Reference to inviewport directive instance
    *
-   * @type {InViewportDirective}
-   * @memberof VideoLoaderComponent
    */
-  @ViewChild('videoEl')
-  public videoEl: InViewportDirective;
+  @ViewChild('snInViewport')
+  public snInViewport: InViewportDirective;
   /**
    * List of breakpoints to select video from
    *
@@ -235,7 +233,7 @@ export class VideoLoaderComponent implements AfterViewInit, OnDestroy {
    * @memberof VideoLoaderComponent
    */
   public checkInViewportStatus(): void {
-    this.videoEl.calculateInViewportStatus();
+    this.snInViewport.calculateInViewportStatus();
   }
   /**
    * On width change, determine if device has changed and

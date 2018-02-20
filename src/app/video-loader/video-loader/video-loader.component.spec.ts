@@ -101,7 +101,7 @@ describe('VideoLoaderComponent', () => {
   });
 
   it('should check inviewport status', () => {
-    const spy = spyOn(component.videoEl, 'calculateInViewportStatus');
+    const spy = spyOn(component.snInViewport, 'calculateInViewportStatus');
     component.checkInViewportStatus();
     expect(spy).toHaveBeenCalled();
   });

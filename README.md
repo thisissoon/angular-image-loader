@@ -134,6 +134,20 @@ export class AppComponent {
 }
 ```
 
+### Check inviewport status manually
+
+```html
+<sn-image-loader
+  [image]="image"
+  [sizes]="sizes"
+  imgClass="img"
+  alt="lorem ipsum"
+  #imgEl>
+</sn-image-loader>
+
+<button (click)="imgEl.checkInViewportStatus()">Check status</button>
+```
+
 ## Video Loader Example
 
 ### `app.component.html`

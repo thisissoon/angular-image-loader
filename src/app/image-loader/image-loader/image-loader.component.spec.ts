@@ -2,7 +2,7 @@ import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { WindowRef } from '@thisissoon/angular-inviewport';
+import { InViewportModule } from '@thisissoon/angular-inviewport';
 
 import { ImageLoaderComponent } from './image-loader.component';
 import { ResponsiveImage } from '../shared/image.model';
@@ -50,8 +50,8 @@ describe('ImageLoaderComponent', () => {
       declarations: [
         ImageLoaderComponent
       ],
-      providers: [
-        WindowRef
+      imports: [
+        InViewportModule.forRoot()
       ],
     });
 
@@ -207,4 +207,9 @@ describe('ImageLoaderComponent', () => {
     expect(component.src).toEqual('');
   });
 
+  it('should check inviewport status', () => {
+    const spy = spyOn(component.snInViewport, 'calculateInViewportStatus');
+    component.checkInViewportStatus();
+    expect(spy).toHaveBeenCalled();
+  });
 });

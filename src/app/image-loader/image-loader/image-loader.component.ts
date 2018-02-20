@@ -16,7 +16,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { takeUntil, debounceTime } from 'rxjs/operators';
-import { WindowRef } from '@thisissoon/angular-inviewport';
+import { WindowRef, InViewportDirective } from '@thisissoon/angular-inviewport';
 
 import * as classes from '../shared/classes';
 import * as events from '../shared/events';
@@ -33,7 +33,7 @@ import {
  * for the device size
  *
  * @example
- * ```
+ * ```html
  * <sn-image-loader
  *   [image]="image"
  *   [sizes]="sizes"
@@ -128,12 +128,19 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   public ngUnsubscribe$ = new Subject<void>();
   /**
-   * Reference to dummy image element
+   * Reference to image element
    *
    * @memberof ImageLoaderComponent
    */
   @ViewChild('img')
   public img: ElementRef;
+  /**
+   * Reference to instance of inViewport directive instance
+   *
+   * @memberof ImageLoaderComponent
+   */
+  @ViewChild('snInViewport')
+  public snInViewport: InViewportDirective;
   /**
    * If true it means the browser supports `srcset`
    * @memberof ImageLoaderComponent
@@ -209,6 +216,12 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
           this.ngZone.run(() => this.onWidthChange(event.target.innerWidth))
         );
     });
+  }
+  /**
+   * Checks if image element is in viewport
+   */
+  public checkInViewportStatus(): void {
+    this.snInViewport.calculateInViewportStatus();
   }
   /**
    * If element is in viewport preload image by setting the src

@@ -19,8 +19,10 @@
   alt="lorem ipsum"
   (placeholderLoaded)="onPlaceholderLoad($event)"
   (imageLoaded)="onImageLoad($event)"
-  class="sn-image-loader sn-image-loader--bottom">
+  class="sn-image-loader sn-image-loader--bottom"
+  #imgEl>
 </sn-image-loader>
+<button (click)="imgEl.checkInViewportStatus()">Check</button>
 <h3>Bottom image imageLoaded event count: <span class="image-loaded-count">{{ imageLoadedEventCount }}</span></h3>
 <div class="spacer"></div>
 
