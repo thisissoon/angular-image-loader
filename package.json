@@ -1,6 +1,6 @@
 {
   "name": "@thisissoon/angular-image-loader",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "A simple progressive, responsive, lazy  image and video loading library for Angular that detects browser size and loads the appropriate image or video only when the element is in viewport. This package requires @thisissoon/angular-inviewport",
   "keywords": [
     "angular",

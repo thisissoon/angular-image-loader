@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/thisissoon/angular-image-loader/compare/v3.1.0...v3.2.0) (2018-02-20)
+
+
+### Features
+
+* **ImageLoader:** add ability to manually check inviewport status ([ead8821](https://github.com/thisissoon/angular-image-loader/commit/ead8821))
+* **VideoLoader:** add ability to manually check inviewport status ([72d9b3f](https://github.com/thisissoon/angular-image-loader/commit/72d9b3f))
+
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/thisissoon/angular-image-loader/compare/v3.0.1...v3.1.0) (2018-02-15)
 
