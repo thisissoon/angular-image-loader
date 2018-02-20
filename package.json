@@ -39,7 +39,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "coverage": "coveralls < coverage/lcov.info",
-    "packagr": "ng-packagr -p ng-package.json",
+    "packagr": "ng-packagr -p package.json",
     "release": "standard-version",
     "postrelease": "npm run packagr"
   },
@@ -80,7 +80,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-spec-reporter": "0.0.31",
-    "ng-packagr": "2.0.0-rc.12",
+    "ng-packagr": "^2.0.0",
     "protractor": "~5.3.0",
     "rxjs": "^5.5.6",
     "standard-version": "^4.2.0",
@@ -92,6 +92,15 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "ngPackage": {
+    "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+    "lib": {
+      "entryFile": "src/index.ts",
+      "umdModuleIds": {
+        "@thisissoon/angular-inviewport": "angularInViewport"
+      }
     }
   }
 }
