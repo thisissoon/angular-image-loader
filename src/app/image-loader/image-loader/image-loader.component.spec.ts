@@ -212,4 +212,10 @@ describe('ImageLoaderComponent', () => {
     component.checkInViewportStatus();
     expect(spy).toHaveBeenCalled();
   });
+
+  it('should set placeholder on changes', () => {
+    const spy = spyOn(component, 'setPlaceholder');
+    component.ngOnChanges();
+    expect(spy).toHaveBeenCalled();
+  });
 });
