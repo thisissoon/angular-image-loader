@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.1"></a>
+## [3.2.1](https://github.com/thisissoon/angular-image-loader/compare/v3.2.0...v3.2.1) (2018-03-01)
+
+
+### Bug Fixes
+
+* **component:** setPlaceholder called in Angular onChanges life cylce hook ([2006718](https://github.com/thisissoon/angular-image-loader/commit/2006718))
+
+
+
 <a name="3.2.0"></a>
 # [3.2.0](https://github.com/thisissoon/angular-image-loader/compare/v3.1.0...v3.2.0) (2018-02-20)
 
