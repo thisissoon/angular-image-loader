@@ -10,7 +10,8 @@ import {
   OnDestroy,
   ViewChild,
   ElementRef,
-  NgZone
+  NgZone,
+  OnChanges
 } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
@@ -50,7 +51,7 @@ import {
   templateUrl: './image-loader.component.html',
   styleUrls: [ './image-loader.component.scss' ]
 })
-export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   /**
    * URL of image for `img` element to display
    * @memberof ImageLoaderComponent
@@ -330,5 +331,15 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
   public ngOnDestroy(): void {
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
+  }
+  /**
+   * Trigger image preload on changes.
+   * Prevents angular from reusing rendered image
+   * after changes.
+   *
+   * @memberof ImageLoaderComponent
+   */
+  public ngOnChanges(): void {
+    this.setPlaceholder();
   }
 }

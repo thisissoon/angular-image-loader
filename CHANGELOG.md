@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/thisissoon/angular-image-loader/compare/v1.2.2...v4.0.0) (2018-03-01)
+
+
+### Bug Fixes
+
+* **build:** fix ts error in packagr build ([26e874b](https://github.com/thisissoon/angular-image-loader/commit/26e874b))
+* **build:** fixed issue with importing library into aot build ([c7efd34](https://github.com/thisissoon/angular-image-loader/commit/c7efd34))
+* **Imageloader:** fixed issue where browser would load both 1x and 2x images if the element was invi ([07400fd](https://github.com/thisissoon/angular-image-loader/commit/07400fd))
+* **ImageLoader:** fallback image being loaded when clearing src value from dummy image ([ecef4aa](https://github.com/thisissoon/angular-image-loader/commit/ecef4aa))
+* **ImageLoader:** fixed issue where fallback image was not being loaded ([8ba400b](https://github.com/thisissoon/angular-image-loader/commit/8ba400b))
+* **ImageLoader:** fixing imports so all symbols can be imported from [@thisissoon](https://github.com/thisissoon)/angular-image-loade ([228276b](https://github.com/thisissoon/angular-image-loader/commit/228276b))
+* **VideoLoader:** fix poster value throwing change detection error ([e8d702f](https://github.com/thisissoon/angular-image-loader/commit/e8d702f))
+* **VideoLoader:** fixing *ngIf breaking inviewport logic ([08f8d2f](https://github.com/thisissoon/angular-image-loader/commit/08f8d2f))
+
+
+### Code Refactoring
+
+* **app:** Changed the models for ResponsiveImage and RetinaImage to allow for more flexible ima ([d78fc4e](https://github.com/thisissoon/angular-image-loader/commit/d78fc4e))
+* **function and variable names:** updated image and full res image loaded event handlers and tr ([2a1bb76](https://github.com/thisissoon/angular-image-loader/commit/2a1bb76))
+
+
+### Features
+
+* **ImageLoader:** add ability to manually check inviewport status ([ead8821](https://github.com/thisissoon/angular-image-loader/commit/ead8821))
+* **ImageLoader:** remove dummy element after image load ([c3ef408](https://github.com/thisissoon/angular-image-loader/commit/c3ef408))
+* **VideoLoader:** add ability to manually check inviewport status ([72d9b3f](https://github.com/thisissoon/angular-image-loader/commit/72d9b3f))
+* **VideoLoader:** adding Video loader module for responsive videos ([453c0c0](https://github.com/thisissoon/angular-image-loader/commit/453c0c0))
+
+
+### Performance Improvements
+
+* **ImageLoader:** use rxjs from event instead of angular HostBinding api ([37a7f86](https://github.com/thisissoon/angular-image-loader/commit/37a7f86))
+
+
+### BREAKING CHANGES
+
+* **function and variable names:** imagePlaceholderLoaded output changed to placeholderLoaded
+* **app:** sn-image-loader component now expects a differently structured responsiveImage
+object.
+
+
+
 <a name="3.2.0"></a>
 # [3.2.0](https://github.com/thisissoon/angular-image-loader/compare/v3.1.0...v3.2.0) (2018-02-20)
 
