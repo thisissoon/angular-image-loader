@@ -6,7 +6,8 @@ import {
   ViewChild,
   AfterViewInit,
   OnDestroy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  ElementRef
 } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { fromEvent } from 'rxjs/observable/fromEvent';
@@ -107,6 +108,13 @@ export class VideoLoaderComponent implements AfterViewInit, OnDestroy {
    */
   @ViewChild('snInViewport')
   public snInViewport: InViewportDirective;
+  /**
+   * Reference to HTML Video element
+   *
+   * @memberof VideoLoaderComponent
+   */
+  @ViewChild('videoEl')
+  public videoEl: ElementRef;
   /**
    * List of breakpoints to select video from
    *
