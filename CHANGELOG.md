@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.0"></a>
+# [3.3.0](https://github.com/thisissoon/angular-image-loader/compare/v3.2.1...v3.3.0) (2018-03-06)
+
+
+### Features
+
+* **VideoLoader:** expose video element to parent components ([a65ace2](https://github.com/thisissoon/angular-image-loader/commit/a65ace2))
+
+
+
 <a name="3.2.1"></a>
 ## [3.2.1](https://github.com/thisissoon/angular-image-loader/compare/v3.2.0...v3.2.1) (2018-03-01)
 
