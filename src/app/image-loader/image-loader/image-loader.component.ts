@@ -340,6 +340,9 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy, O
    * @memberof ImageLoaderComponent
    */
   public ngOnChanges(): void {
+    this.src = '';
+    this.srcset = '';
     this.setPlaceholder();
+    this.preloadImage();
   }
 }
