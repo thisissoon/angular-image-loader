@@ -24,3 +24,4 @@ script:
   - export CHROME_BIN=chromium-browser
   - xvfb-run -a npm run test -- --no-progress --single-run --code-coverage --browser=ChromeNoSandbox
   - xvfb-run -a npm run e2e -- --no-progress
+  - npm run coverage

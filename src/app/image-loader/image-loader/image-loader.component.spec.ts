@@ -218,4 +218,10 @@ describe('ImageLoaderComponent', () => {
     component.ngOnChanges();
     expect(spy).toHaveBeenCalled();
   });
+
+  it('should preload image on changes', () => {
+    const spy = spyOn(component, 'preloadImage');
+    component.ngOnChanges();
+    expect(spy).toHaveBeenCalled();
+  });
 });
