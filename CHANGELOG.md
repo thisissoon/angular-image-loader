@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.1"></a>
+## [3.3.1](https://github.com/thisissoon/angular-image-loader/compare/v3.3.0...v3.3.1) (2018-05-21)
+
+
+### Bug Fixes
+
+* **image loader:** clear src and srct on changes and pre load image ([9682008](https://github.com/thisissoon/angular-image-loader/commit/9682008))
+* **VideoLoader:** autoplay issue in safari on ios and osx ([1d954ad](https://github.com/thisissoon/angular-image-loader/commit/1d954ad))
+
+
+
 <a name="3.3.0"></a>
 # [3.3.0](https://github.com/thisissoon/angular-image-loader/compare/v3.2.1...v3.3.0) (2018-03-06)
 
