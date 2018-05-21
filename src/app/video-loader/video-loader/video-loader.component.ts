@@ -5,6 +5,7 @@ import {
   NgZone,
   ViewChild,
   AfterViewInit,
+  OnInit,
   OnDestroy,
   ChangeDetectorRef,
   ElementRef
@@ -46,7 +47,7 @@ import { ImageLoadedEvent } from '../../image-loader/shared/image-loaded-event.m
   templateUrl: './video-loader.component.html',
   styleUrls: ['./video-loader.component.scss']
 })
-export class VideoLoaderComponent implements AfterViewInit, OnDestroy {
+export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Videos to select from
    *
@@ -205,6 +206,17 @@ export class VideoLoaderComponent implements AfterViewInit, OnDestroy {
     private ngZone: NgZone,
     private cdRef: ChangeDetectorRef
   ) { }
+  /**
+   * Set poster before component renders to resolve an issue
+   * with autoplay on safari browsers
+   *
+   * @memberof VideoLoaderComponent
+   */
+  public ngOnInit(): void {
+    if (this.video.poster && this.video.poster.placeholder) {
+      this.poster = this.video.poster.placeholder;
+    }
+  }
   /**
    * Subscribe to `resize` window event observable
    * and run callback
