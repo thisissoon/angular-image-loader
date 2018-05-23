@@ -8,13 +8,11 @@ import { AppComponent } from './app.component';
 
 export const getWindow = () => window;
 export const providers: Provider[] = [
-  { provide: WindowRef, useFactory: (getWindow) }
+  { provide: WindowRef, useFactory: getWindow }
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     InViewportModule.forRoot(providers),
@@ -24,4 +22,4 @@ export const providers: Provider[] = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

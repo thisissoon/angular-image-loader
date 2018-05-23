@@ -32,7 +32,6 @@ export class AppComponent {
    */
   imageLoadedEventCount = 0;
 
-
   /**
    * Increments event count on each image loaded event.
    * Counter displayed in component template.

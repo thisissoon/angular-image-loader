@@ -21,11 +21,7 @@ import * as classes from '../shared/classes';
 import * as events from '../shared/events';
 import { ImageLoadedEvent } from '../shared/image-loaded-event.model';
 import { Breakpoint } from '../shared/breakpoint.model';
-import {
-  ResponsiveImage,
-  RetinaImage,
-  Size
-} from '../shared/image.model';
+import { ResponsiveImage, RetinaImage, Size } from '../shared/image.model';
 
 /**
  * A component that renders a `img` element with the correct image url
@@ -47,9 +43,10 @@ import {
 @Component({
   selector: 'sn-image-loader',
   templateUrl: './image-loader.component.html',
-  styleUrls: [ './image-loader.component.scss' ]
+  styleUrls: ['./image-loader.component.scss']
 })
-export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+export class ImageLoaderComponent
+  implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   /**
    * URL of image for `img` element to display
    * @memberof ImageLoaderComponent
@@ -64,14 +61,12 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy, O
    * Alt tag for image
    * @memberof ImageLoaderComponent
    */
-  @Input()
-  public alt = '';
+  @Input() public alt = '';
   /**
    * Classes to pass on to image element
    * @memberof ImageLoaderComponent
    */
-  @Input()
-  public imgClass = '';
+  @Input() public imgClass = '';
   /**
    * URL of image to preload using a dummy image element
    * @memberof ImageLoaderComponent
@@ -105,8 +100,7 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy, O
    *
    * @memberof ImageLoaderComponent
    */
-  @Input()
-  public image: ResponsiveImage;
+  @Input() public image: ResponsiveImage;
   /**
    * If true means the element is inside the browser viewport
    *
@@ -131,15 +125,13 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy, O
    *
    * @memberof ImageLoaderComponent
    */
-  @ViewChild('img')
-  public img: ElementRef;
+  @ViewChild('img') public img: ElementRef;
   /**
    * Reference to instance of inViewport directive instance
    *
    * @memberof ImageLoaderComponent
    */
-  @ViewChild('snInViewport')
-  public snInViewport: InViewportDirective;
+  @ViewChild('snInViewport') public snInViewport: InViewportDirective;
   /**
    * If true it means the browser supports `srcset`
    * @memberof ImageLoaderComponent
@@ -151,22 +143,25 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy, O
    * @memberof ImageLoaderComponent
    */
   @Output()
-  public placeholderLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<ImageLoadedEvent>();
+  public placeholderLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<
+    ImageLoadedEvent
+  >();
   /**
    * Output for full res image loaded event.
    *
    * @memberof ImageLoaderComponent
    */
   @Output()
-  public imageLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<ImageLoadedEvent>();
+  public imageLoaded: EventEmitter<ImageLoadedEvent> = new EventEmitter<
+    ImageLoadedEvent
+  >();
   /**
    * If true means the image has not been loaded yet and
    * the placeholder image is currently displayed
    *
    * @memberof ImageLoaderComponent
    */
-  @HostBinding(classes.loadedClass)
-  public loaded = false;
+  @HostBinding(classes.loadedClass) public loaded = false;
   /**
    * If true means the image has not been loaded yet and
    * the placeholder image is currently displayed
@@ -184,10 +179,7 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy, O
    *
    * @memberof ImageLoaderComponent
    */
-  constructor(
-    private windowRef: WindowRef,
-    private ngZone: NgZone
-  ) {}
+  constructor(private windowRef: WindowRef, private ngZone: NgZone) {}
   /**
    * Set placeholder image as image on component init
    *
@@ -207,10 +199,7 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy, O
     // Listen for window scroll/resize events.
     this.ngZone.runOutsideAngular(() => {
       fromEvent(this.windowRef as any, events.eventResize)
-        .pipe(
-          takeUntil(this.ngUnsubscribe$),
-          debounceTime(this.debounce)
-        )
+        .pipe(takeUntil(this.ngUnsubscribe$), debounceTime(this.debounce))
         .subscribe((event: any) =>
           this.ngZone.run(() => this.onWidthChange(event.target.innerWidth))
         );
@@ -239,7 +228,7 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy, O
    * @memberof ImageLoaderComponent
    */
   public onWidthChange(width: number): void {
-    const sizes = this.sizes.filter((size) => size.width <= width);
+    const sizes = this.sizes.filter(size => size.width <= width);
     const lastSize = sizes[sizes.length - 1];
     if (!this.size || this.size !== lastSize.size) {
       this.size = lastSize.size;
@@ -264,7 +253,9 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy, O
    */
   public preloadImage(): void {
     if (this.inViewport && this.notLoaded) {
-      const retinaImg = this.image.images.find(retinaImage => retinaImage.size === this.size);
+      const retinaImg = this.image.images.find(
+        retinaImage => retinaImage.size === this.size
+      );
       const imageNormal = retinaImg.x1;
       const imageRetina = retinaImg.x2;
       if ('srcset' in this.img.nativeElement) {
@@ -281,7 +272,9 @@ export class ImageLoaderComponent implements OnInit, AfterViewInit, OnDestroy, O
    * @memberof ImageLoaderComponent
    */
   public onImagePreload(): void {
-    const retinaImg = this.image.images.find(retinaImage => retinaImage.size === this.size);
+    const retinaImg = this.image.images.find(
+      retinaImage => retinaImage.size === this.size
+    );
     const imageNormal = retinaImg.x1;
     const imageRetina = retinaImg.x2;
     this.srcset = `${imageNormal} 1x, ${imageRetina} 2x`;

@@ -12,12 +12,8 @@ import { VideoLoaderComponent } from './video-loader/video-loader.component';
  *
  */
 @NgModule({
-  imports: [
-    CommonModule,
-    InViewportModule,
-    ImageLoaderModule
-  ],
+  imports: [CommonModule, InViewportModule, ImageLoaderModule],
   declarations: [VideoLoaderComponent],
   exports: [VideoLoaderComponent]
 })
-export class VideoLoaderModule { }
+export class VideoLoaderModule {}

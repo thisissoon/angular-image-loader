@@ -13,9 +13,9 @@ describe('ImageLoaderComponent', () => {
   let fixture: ComponentFixture<ImageLoaderComponent>;
   let component: ImageLoaderComponent;
   const sizes: Breakpoint[] = [
-    { size: 'xs', width: 0},
-    { size: 'md', width: 768},
-    { size: 'lg', width: 992},
+    { size: 'xs', width: 0 },
+    { size: 'md', width: 768 },
+    { size: 'lg', width: 992 }
   ];
   let testBed;
 
@@ -43,16 +43,9 @@ describe('ImageLoaderComponent', () => {
 
   beforeEach(async(() => {
     testBed = TestBed.configureTestingModule({
-      schemas: [
-        NO_ERRORS_SCHEMA,
-        CUSTOM_ELEMENTS_SCHEMA
-      ],
-      declarations: [
-        ImageLoaderComponent
-      ],
-      imports: [
-        InViewportModule.forRoot()
-      ],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+      declarations: [ImageLoaderComponent],
+      imports: [InViewportModule.forRoot()]
     });
 
     testBed.compileComponents();
@@ -140,12 +133,15 @@ describe('ImageLoaderComponent', () => {
     component.loaded = false;
     component.img.nativeElement = { src: null };
     component.preloadImage();
-    expect(component.preloadSrc).toEqual('http://via.placeholder.com/150x350?text=xs+1x');
+    expect(component.preloadSrc).toEqual(
+      'http://via.placeholder.com/150x350?text=xs+1x'
+    );
 
     component.supportsSrcSet = true;
     component.preloadImage();
-    expect(component.preloadSrcset)
-      .toEqual('http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x');
+    expect(component.preloadSrcset).toEqual(
+      'http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x'
+    );
   });
 
   it('should set src to preloaded image url', () => {
@@ -155,20 +151,26 @@ describe('ImageLoaderComponent', () => {
     component.loaded = false;
     component.img.nativeElement = { src: null };
     component.preloadImage();
-    expect(component.preloadSrc).toEqual('http://via.placeholder.com/150x350?text=xs+1x');
+    expect(component.preloadSrc).toEqual(
+      'http://via.placeholder.com/150x350?text=xs+1x'
+    );
 
     component.onImagePreload();
-    expect(component.src).toEqual('http://via.placeholder.com/150x350?text=xs+1x');
+    expect(component.src).toEqual(
+      'http://via.placeholder.com/150x350?text=xs+1x'
+    );
 
     component.supportsSrcSet = true;
     component.loaded = false;
     component.preloadImage();
-    expect(component.preloadSrcset)
-      .toEqual('http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x');
+    expect(component.preloadSrcset).toEqual(
+      'http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x'
+    );
 
     component.onImagePreload();
-    expect(component.srcset)
-      .toEqual('http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x');
+    expect(component.srcset).toEqual(
+      'http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x'
+    );
   });
 
   it('should emit a full res loaded event on image load when loaded is true', () => {

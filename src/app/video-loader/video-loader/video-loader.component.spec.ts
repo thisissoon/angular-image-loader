@@ -13,9 +13,8 @@ describe('VideoLoaderComponent', () => {
     TestBed.configureTestingModule({
       imports: [InViewportModule.forRoot()],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [ VideoLoaderComponent ]
-    })
-    .compileComponents();
+      declarations: [VideoLoaderComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -105,5 +104,4 @@ describe('VideoLoaderComponent', () => {
     component.checkInViewportStatus();
     expect(spy).toHaveBeenCalled();
   });
-
 });

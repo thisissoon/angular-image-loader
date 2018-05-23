@@ -21,7 +21,6 @@ import * as classes from '../shared/classes';
 import * as events from '../../image-loader/shared/events';
 import { ImageLoadedEvent } from '../../image-loader/shared/image-loaded-event.model';
 
-
 /**
  * A component that load a `video` element with the correct
  * video and poster for the device size
@@ -52,8 +51,7 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    *
    * @memberof VideoLoaderComponent
    */
-  @Input()
-  public video: ResponsiveVideo;
+  @Input() public video: ResponsiveVideo;
   /**
    * Current src value to set to video
    *
@@ -71,50 +69,43 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    *
    * @memberof VideoLoaderComponent
    */
-  @Input()
-  public loop: boolean;
+  @Input() public loop: boolean;
   /**
    * If true displays the video controls
    *
    * @memberof VideoLoaderComponent
    */
-  @Input()
-  public controls: boolean;
+  @Input() public controls: boolean;
   /**
    * If true the video will be muted
    *
    * @memberof VideoLoaderComponent
    */
-  @Input()
-  public muted: boolean;
+  @Input() public muted: boolean;
   /**
    * If true video should autoplay
    *
    * @memberof VideoLoaderComponent
    */
-  @Input()
-  public autoplay: boolean;
+  @Input() public autoplay: boolean;
   /**
    * If true the video will playinline rather then
    * in a modal window on iOS
    *
    * @memberof VideoLoaderComponent
    */
-  @Input()
-  public playsInline: boolean;
+  @Input() public playsInline: boolean;
   /**
    * Reference to inviewport directive instance
    *
    */
-  @ViewChild('snInViewport')
-  public snInViewport: InViewportDirective;
+  @ViewChild('snInViewport') public snInViewport: InViewportDirective;
   /**
    * Reference to HTML Video element
    *
    * @memberof VideoLoaderComponent
    */
-  @ViewChild('videoEl')
-  public videoEl: ElementRef;
+  @ViewChild('videoEl') public videoEl: ElementRef;
   /**
    * List of breakpoints to select video from
    *
@@ -138,8 +129,7 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    *
    * @memberof VideoLoaderComponent
    */
-  @Input()
-  public type: string;
+  @Input() public type: string;
   /**
    * If true means the element is inside the browser viewport
    *
@@ -156,14 +146,12 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * Classes to pass on to video element
    * @memberof VideoLoaderComponent
    */
-  @Input()
-  public videoClass = '';
+  @Input() public videoClass = '';
   /**
    * Classes to pass on to image element
    * @memberof VideoLoaderComponent
    */
-  @Input()
-  public posterClass = '';
+  @Input() public posterClass = '';
   /**
    * Value for video poster property
    *
@@ -183,8 +171,7 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    *
    * @memberof VideoLoaderComponent
    */
-  @HostBinding(classes.loadedClass)
-  public loaded = false;
+  @HostBinding(classes.loadedClass) public loaded = false;
   /**
    * If true means the video has not been loaded yet and
    * the placeholder video is currently displayed
@@ -197,14 +184,14 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
     return !this.loaded;
   }
   /**
-    * Creates an instance of VideoLoaderComponent.
-    * @memberof VideoLoaderComponent
-    */
+   * Creates an instance of VideoLoaderComponent.
+   * @memberof VideoLoaderComponent
+   */
   constructor(
     private windowRef: WindowRef,
     private ngZone: NgZone,
     private cdRef: ChangeDetectorRef
-  ) { }
+  ) {}
   /**
    * Set poster before component renders to resolve an issue
    * with autoplay on safari browsers
@@ -226,7 +213,7 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
     // Listen for window scroll/resize events.
     this.ngZone.runOutsideAngular(() => {
       fromEvent(this.windowRef as any, events.eventResize)
-      .pipe(
+        .pipe(
           takeUntil(this.ngUnsubscribe$),
           debounceTime(this.debounce),
           startWith({ target: { innerWidth: this.windowRef.innerWidth } })
@@ -261,7 +248,7 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof VideoLoaderComponent
    */
   public onWidthChange(width: number): void {
-    const sizes = this.sizes.filter((size) => size.width <= width);
+    const sizes = this.sizes.filter(size => size.width <= width);
     const lastSize = sizes[sizes.length - 1];
     if (!this.size || this.size !== lastSize.size) {
       this.size = lastSize.size;

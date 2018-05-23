@@ -10,9 +10,4 @@ export interface RetinaImage {
   x2?: string;
 }
 
-export type Size =
-  'xs' |
-  'sm' |
-  'md' |
-  'lg' |
-  'xl';
+export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';

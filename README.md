@@ -1,7 +1,9 @@
 # Angular Image Loader
+
 [![Build Status][travis-badge]][travis-badge-url]
 [![Coverage Status][coveralls-badge]][coveralls-badge-url]
 [![Commitizen friendly][commitizen-badge]][commitizen]
+[![code style: prettier][prettier-badge]][prettier-badge-url]
 
 This project was generated with [Angular CLI][angular-cli] version 1.5.4.
 
@@ -11,7 +13,6 @@ A simple progressive/responsive/lazy loading image library for [Angular][angular
 
 This is a simple library for [Angular][angular], implemented in the [Angular Package Format v5.0][apfv5].
 
-
 ## Install
 
 ### via NPM
@@ -20,11 +21,15 @@ This is a simple library for [Angular][angular], implemented in the [Angular Pac
 
 ### via Yarn
 
-`yarn add @thisissoon/angular-image-loader @thisissoon/angular-inviewport `
+`yarn add @thisissoon/angular-image-loader @thisissoon/angular-inviewport`
 
 `app.module.ts`
+
 ```ts
-import { ImageLoaderModule, VideoLoaderModule } from '@thisissoon/angular-image-loader';
+import {
+  ImageLoaderModule,
+  VideoLoaderModule
+} from '@thisissoon/angular-image-loader';
 import { InViewportModule, WindowRef } from '@thisissoon/angular-inviewport';
 
 // Provide window object for platform browser
@@ -39,10 +44,11 @@ export const providers: Provider[] = [
     VideoLoaderModule // Only this import required if using just the video loader
   ]
 })
-export class AppModule { }
+export class AppModule {}
 ```
 
 `app.server.module.ts` (Only needed if using Angular Universal)
+
 ```ts
 import { ImageLoaderModule } from '@thisissoon/angular-image-loader';
 import { InViewportModule, WindowRef } from '@thisissoon/angular-inviewport';
@@ -55,9 +61,8 @@ import { InViewportModule, WindowRef } from '@thisissoon/angular-inviewport';
     VideoLoaderModule
   ]
 })
-export class AppModule { }
+export class AppModule {}
 ```
-
 
 ## Image Loader Example
 
@@ -83,7 +88,7 @@ export class AppComponent {
   sizes: Breakpoint[] = [
     { size: 'xs', width: 0 },
     { size: 'md', width: 768 },
-    { size: 'lg', width: 992 },
+    { size: 'lg', width: 992 }
   ];
 
   image: ResponsiveImage = {
@@ -122,7 +127,7 @@ export class AppComponent {
 
 ```css
 .foo {
-  transition: all .35s ease-in-out;
+  transition: all 0.35s ease-in-out;
 }
 
 .sn-image-not-loaded ::ng-deep .img {
@@ -174,22 +179,25 @@ export class AppComponent {
   sizes: Breakpoint[] = [
     { size: 'xs', width: 0 },
     { size: 'md', width: 768 },
-    { size: 'lg', width: 992 },
+    { size: 'lg', width: 992 }
   ];
 
   video: ResponsiveVideo = {
     videos: [
       {
         size: 'xs',
-        url: 'http://res.cloudinary.com/thisissoon/video/upload/ac_none,c_fill,h_568,q_80,w_320/v1517616795/demos/jellyfish-25-mbps-hd-hevc.mp4'
+        url:
+          'http://res.cloudinary.com/thisissoon/video/upload/ac_none,c_fill,h_568,q_80,w_320/v1517616795/demos/jellyfish-25-mbps-hd-hevc.mp4'
       },
       {
         size: 'md',
-        url: 'http://res.cloudinary.com/thisissoon/video/upload/ac_none,c_fill,h_1024,q_80,w_768/v1517616795/demos/jellyfish-25-mbps-hd-hevc.mp4'
+        url:
+          'http://res.cloudinary.com/thisissoon/video/upload/ac_none,c_fill,h_1024,q_80,w_768/v1517616795/demos/jellyfish-25-mbps-hd-hevc.mp4'
       },
       {
         size: 'lg',
-        url: 'http://res.cloudinary.com/thisissoon/video/upload/ac_none,c_fill,h_720,q_80,w_1280/v1517616795/demos/jellyfish-25-mbps-hd-hevc.mp4'
+        url:
+          'http://res.cloudinary.com/thisissoon/video/upload/ac_none,c_fill,h_720,q_80,w_1280/v1517616795/demos/jellyfish-25-mbps-hd-hevc.mp4'
       }
     ],
     poster: {
@@ -198,7 +206,6 @@ export class AppComponent {
   };
 }
 ```
-
 
 ### Check inviewport status manually
 
@@ -219,7 +226,6 @@ export class AppComponent {
 
 <button (click)="videoEl.checkInViewportStatus()">Check status</button>
 ```
-
 
 ## Development server
 
@@ -249,24 +255,24 @@ This repo uses [Commitizen CLI][commitizen] and [Conventional Changelog][convent
 
 Run `npm run release` to create a new release. This will use [Standard Version][standard-version] to create a new release. [Standard Version][standard-version] will generate / update the changelog based on commits generated using [Commitizen CLI][commitizen], update the version number following semantic versioning rules and then commit and tag the commit for the release. Simply run `git push --follow-tags origin master`.
 
-
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README][angular-cli-readme].
-
 
 [travis-badge]: https://travis-ci.org/thisissoon/angular-image-loader.svg?branch=master
 [travis-badge-url]: https://travis-ci.org/thisissoon/angular-image-loader
 [coveralls-badge]: https://coveralls.io/repos/github/thisissoon/angular-image-loader/badge.svg?branch=master
 [coveralls-badge-url]: https://coveralls.io/github/thisissoon/angular-image-loader?branch=master
+[prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=shield
+[prettier-badge-url]: https://github.com/prettier/prettier
 [angular]: https://angular.io/
 [angular-inviewport]: https://github.com/thisissoon/angular-inviewport
-[commitizen]:http://commitizen.github.io/cz-cli/
-[commitizen-badge]:https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
-[conventional-changelog]:https://github.com/conventional-changelog/conventional-changelog
-[standard-version]:https://github.com/conventional-changelog/standard-version
-[karma]:https://karma-runner.github.io
-[protractor]:http://www.protractortest.org/
-[angular-cli]:https://github.com/angular/angular-cli
-[angular-cli-readme]:https://github.com/angular/angular-cli/blob/master/README.md
-[apfv5]:(https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/edit#heading=h.k0mh3o8u5hx)
+[commitizen]: http://commitizen.github.io/cz-cli/
+[commitizen-badge]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
+[conventional-changelog]: https://github.com/conventional-changelog/conventional-changelog
+[standard-version]: https://github.com/conventional-changelog/standard-version
+[karma]: https://karma-runner.github.io
+[protractor]: http://www.protractortest.org/
+[angular-cli]: https://github.com/angular/angular-cli
+[angular-cli-readme]: https://github.com/angular/angular-cli/blob/master/README.md
+[apfv5]: (https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/edit#heading=h.k0mh3o8u5hx)
