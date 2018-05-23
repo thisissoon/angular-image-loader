@@ -17,11 +17,12 @@ cache:
      - ./node_modules
 
 install:
-  - npm install
+  - npm i --no-progress
 
 script:
   # Use Chromium instead of Chrome.
   - export CHROME_BIN=chromium-browser
-  - xvfb-run -a npm run test -- --no-progress --single-run --code-coverage --browser=ChromeNoSandbox
-  - xvfb-run -a npm run e2e -- --no-progress
+  - npm lint
+  - xvfb-run -a npm run test -- --no-progress --watch false --code-coverage --browsers ChromeNoSandbox
+  - xvfb-run -a npm run e2e
   - npm run coverage
