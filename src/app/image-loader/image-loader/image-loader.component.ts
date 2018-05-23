@@ -13,9 +13,7 @@ import {
   NgZone,
   OnChanges
 } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-import { fromEvent } from 'rxjs/observable/fromEvent';
+import { Observable, Subject, fromEvent } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
 import { WindowRef, InViewportDirective } from '@thisissoon/angular-inviewport';
 

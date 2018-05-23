@@ -10,8 +10,7 @@ import {
   ChangeDetectorRef,
   ElementRef
 } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { fromEvent } from 'rxjs/observable/fromEvent';
+import { Subject, fromEvent } from 'rxjs';
 import { takeUntil, debounceTime, startWith } from 'rxjs/operators';
 import { WindowRef, InViewportDirective } from '@thisissoon/angular-inviewport';
 
