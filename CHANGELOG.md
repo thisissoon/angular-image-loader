@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/thisissoon/angular-image-loader/compare/v3.3.2...v4.0.0) (2018-05-23)
+
+
+### Features
+
+* adding support for angular 6 ([12d1c56](https://github.com/thisissoon/angular-image-loader/commit/12d1c56))
+
+
+### BREAKING CHANGES
+
+* updated peer dependencies to rxjs v6 and @thisissoon/angular-inviewport v3
+
+
+
 <a name="3.3.2"></a>
 ## [3.3.2](https://github.com/thisissoon/angular-image-loader/compare/v3.3.1...v3.3.2) (2018-05-21)
 
