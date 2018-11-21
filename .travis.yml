@@ -3,7 +3,7 @@ sudo: false
 
 language: node_js
 node_js:
-  - "8"
+  - '8'
 
 addons:
   apt:
@@ -12,17 +12,15 @@ addons:
     packages:
       - google-chrome-stable
 
-cache:
-  directories:
-     - ./node_modules
+cache: yarn
 
 install:
-  - npm i --no-progress
+  - yarn --silent
 
 script:
   # Use Chromium instead of Chrome.
   - export CHROME_BIN=chromium-browser
-  - npm run lint
-  - xvfb-run -a npm run test -- --no-progress --watch false --code-coverage --browsers ChromeNoSandbox
-  - xvfb-run -a npm run e2e
-  - npm run coverage
+  - yarn lint
+  - xvfb-run -a yarn test -- --no-progress --watch false --code-coverage --browsers ChromeNoSandbox
+  - xvfb-run -a yarn e2e
+  - yarn coverage

@@ -5,7 +5,6 @@ import {
   EventEmitter,
   OnInit,
   HostBinding,
-  HostListener,
   AfterViewInit,
   OnDestroy,
   ViewChild,
@@ -13,7 +12,7 @@ import {
   NgZone,
   OnChanges
 } from '@angular/core';
-import { Observable, Subject, fromEvent } from 'rxjs';
+import { Subject, fromEvent } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
 import { WindowRef, InViewportDirective } from '@thisissoon/angular-inviewport';
 
@@ -21,7 +20,7 @@ import * as classes from '../shared/classes';
 import * as events from '../shared/events';
 import { ImageLoadedEvent } from '../shared/image-loaded-event.model';
 import { Breakpoint } from '../shared/breakpoint.model';
-import { ResponsiveImage, RetinaImage, Size } from '../shared/image.model';
+import { ResponsiveImage, Size } from '../shared/image.model';
 
 /**
  * A component that renders a `img` element with the correct image url
@@ -199,7 +198,10 @@ export class ImageLoaderComponent
     // Listen for window scroll/resize events.
     this.ngZone.runOutsideAngular(() => {
       fromEvent(this.windowRef as any, events.eventResize)
-        .pipe(takeUntil(this.ngUnsubscribe$), debounceTime(this.debounce))
+        .pipe(
+          takeUntil(this.ngUnsubscribe$),
+          debounceTime(this.debounce)
+        )
         .subscribe((event: any) =>
           this.ngZone.run(() => this.onWidthChange(event.target.innerWidth))
         );
