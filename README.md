@@ -1,11 +1,9 @@
 # Angular Image Loader
 
-[![Build Status][travis-badge]][travis-badge-url]
+[![Build Status][circle-badge]][circle-badge-url]
 [![Coverage Status][coveralls-badge]][coveralls-badge-url]
 [![Commitizen friendly][commitizen-badge]][commitizen]
 [![code style: prettier][prettier-badge]][prettier-badge-url]
-
-This project was generated with [Angular CLI][angular-cli] version 1.5.4.
 
 A simple progressive/responsive/lazy loading image library for [Angular][angular] that detects browser size and loads the appropriate image only when the element is in view. Classes are attributed and events emited on image loads. This package requires [@thisissoon/angular-inviewport][angular-inviewport].
 
@@ -28,21 +26,21 @@ This is a simple library for [Angular][angular], implemented in the [Angular Pac
 ```ts
 import {
   ImageLoaderModule,
-  VideoLoaderModule
+  VideoLoaderModule,
 } from '@thisissoon/angular-image-loader';
 import { InViewportModule, WindowRef } from '@thisissoon/angular-inviewport';
 
 // Provide window object for platform browser
 export const providers: Provider[] = [
-  { provide: WindowRef, useFactory: () => window }
+  { provide: WindowRef, useFactory: () => window },
 ];
 
 @NgModule({
   imports: [
     InViewportModule.forRoot(providers),
     ImageLoaderModule, // Only this import required if using just the image loader
-    VideoLoaderModule // Only this import required if using just the video loader
-  ]
+    VideoLoaderModule, // Only this import required if using just the video loader
+  ],
 })
 export class AppModule {}
 ```
@@ -58,8 +56,8 @@ import { InViewportModule, WindowRef } from '@thisissoon/angular-inviewport';
     // No need to provide WindowRef
     InViewportModule.forRoot(),
     ImageLoaderModule,
-    VideoLoaderModule
-  ]
+    VideoLoaderModule,
+  ],
 })
 export class AppModule {}
 ```
@@ -77,7 +75,8 @@ A working example can be found inside [/src](https://github.com/thisissoon/angul
   imgClass="img"
   alt="lorem ipsum"
   (placeholderLoaded)="onPlaceholderLoad($event)"
-  (imageLoaded)="onImageLoad($event)">
+  (imageLoaded)="onImageLoad($event)"
+>
 </sn-image-loader>
 ```
 
@@ -88,7 +87,7 @@ export class AppComponent {
   sizes: Breakpoint[] = [
     { size: 'xs', width: 0 },
     { size: 'md', width: 768 },
-    { size: 'lg', width: 992 }
+    { size: 'lg', width: 992 },
   ];
 
   image: ResponsiveImage = {
@@ -98,19 +97,19 @@ export class AppComponent {
       {
         size: 'xs',
         x1: 'http://via.placeholder.com/150x350?text=xs+1x',
-        x2: 'http://via.placeholder.com/300x700?text=xs+2x'
+        x2: 'http://via.placeholder.com/300x700?text=xs+2x',
       },
       {
         size: 'md',
         x1: 'http://via.placeholder.com/350x250?text=md+1x',
-        x2: 'http://via.placeholder.com/700x500?text=md+2x'
+        x2: 'http://via.placeholder.com/700x500?text=md+2x',
       },
       {
         size: 'lg',
         x1: 'http://via.placeholder.com/700x400?text=lg+1x',
-        x2: 'http://via.placeholder.com/1400x800?text=lg+2x'
-      }
-    ]
+        x2: 'http://via.placeholder.com/1400x800?text=lg+2x',
+      },
+    ],
   };
 
   public onPlaceholderLoad(imageLoadedEvent: ImageLoadedEvent) {
@@ -147,7 +146,8 @@ export class AppComponent {
   [sizes]="sizes"
   imgClass="img"
   alt="lorem ipsum"
-  #imgEl>
+  #imgEl
+>
 </sn-image-loader>
 
 <button (click)="imgEl.checkInViewportStatus()">Check status</button>
@@ -168,7 +168,8 @@ export class AppComponent {
   [playsInline]="true"
   type="video/mp4"
   videoClass="video"
-  posterClass="img">
+  posterClass="img"
+>
 </sn-video-loader>
 ```
 
@@ -179,7 +180,7 @@ export class AppComponent {
   sizes: Breakpoint[] = [
     { size: 'xs', width: 0 },
     { size: 'md', width: 768 },
-    { size: 'lg', width: 992 }
+    { size: 'lg', width: 992 },
   ];
 
   video: ResponsiveVideo = {
@@ -187,22 +188,22 @@ export class AppComponent {
       {
         size: 'xs',
         url:
-          'http://res.cloudinary.com/thisissoon/video/upload/ac_none,c_fill,h_568,q_80,w_320/v1517616795/demos/jellyfish-25-mbps-hd-hevc.mp4'
+          'http://res.cloudinary.com/thisissoon/video/upload/ac_none,c_fill,h_568,q_80,w_320/v1517616795/demos/jellyfish-25-mbps-hd-hevc.mp4',
       },
       {
         size: 'md',
         url:
-          'http://res.cloudinary.com/thisissoon/video/upload/ac_none,c_fill,h_1024,q_80,w_768/v1517616795/demos/jellyfish-25-mbps-hd-hevc.mp4'
+          'http://res.cloudinary.com/thisissoon/video/upload/ac_none,c_fill,h_1024,q_80,w_768/v1517616795/demos/jellyfish-25-mbps-hd-hevc.mp4',
       },
       {
         size: 'lg',
         url:
-          'http://res.cloudinary.com/thisissoon/video/upload/ac_none,c_fill,h_720,q_80,w_1280/v1517616795/demos/jellyfish-25-mbps-hd-hevc.mp4'
-      }
+          'http://res.cloudinary.com/thisissoon/video/upload/ac_none,c_fill,h_720,q_80,w_1280/v1517616795/demos/jellyfish-25-mbps-hd-hevc.mp4',
+      },
     ],
     poster: {
       // Responsive image, the same object as used for the image loader
-    }
+    },
   };
 }
 ```
@@ -221,7 +222,8 @@ export class AppComponent {
   type="video/mp4"
   videoClass="video"
   posterClass="img"
-  #videoEl>
+  #videoEl
+>
 </sn-video-loader>
 
 <button (click)="videoEl.checkInViewportStatus()">Check status</button>
@@ -259,8 +261,8 @@ Run `npm run release` to create a new release. This will use [Standard Version][
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README][angular-cli-readme].
 
-[travis-badge]: https://travis-ci.org/thisissoon/angular-image-loader.svg?branch=master
-[travis-badge-url]: https://travis-ci.org/thisissoon/angular-image-loader
+[circle-badge]: https://circleci.com/gh/thisissoon/angular-image-loader.svg?branch=master
+[circle-badge-url]: https://circleci.com/gh/thisissoon/angular-image-loader
 [coveralls-badge]: https://coveralls.io/repos/github/thisissoon/angular-image-loader/badge.svg?branch=master
 [coveralls-badge-url]: https://coveralls.io/github/thisissoon/angular-image-loader?branch=master
 [prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=shield
