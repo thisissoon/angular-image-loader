@@ -1,8 +1,9 @@
-import { AppPage } from './app.po';
 import { browser } from 'protractor';
-import { video } from '../src/app/app-data';
 
-describe('VideoLoader Lib E2E Tests', function () {
+import { AppPage } from './app.po';
+import { video } from '../../src/app/app-data';
+
+describe('VideoLoader Lib E2E Tests', function() {
   let page: AppPage;
 
   beforeEach(() => {
@@ -13,10 +14,11 @@ describe('VideoLoader Lib E2E Tests', function () {
 
   afterEach(() => {
     // ensure no errors appear in console
-    browser.manage()
+    browser
+      .manage()
       .logs()
       .get('browser')
-      .then((browserLog) => {
+      .then(browserLog => {
         expect(browserLog).toEqual([]);
       });
   });
@@ -27,7 +29,6 @@ describe('VideoLoader Lib E2E Tests', function () {
     it('should not load video', () => {
       expect(page.isVideoLoaded()).toBeFalsy();
     });
-
   });
 
   describe('video in viewport', () => {
@@ -41,11 +42,9 @@ describe('VideoLoader Lib E2E Tests', function () {
       expect(page.isVideoLoaded()).toBeTruthy();
       expect(page.getVideoSrc()).toEqual(video.videos[0].url);
     });
-
   });
 
   describe('responsive video', () => {
-
     it('should load correct video for "xs" device size', () => {
       page.setWindowSize(400, 580);
       page.scrollToVideoElement();
@@ -69,7 +68,5 @@ describe('VideoLoader Lib E2E Tests', function () {
       expect(page.isVideoLoaded()).toBeTruthy();
       expect(page.getVideoSrc()).toEqual(video.videos[2].url);
     });
-
   });
-
 });

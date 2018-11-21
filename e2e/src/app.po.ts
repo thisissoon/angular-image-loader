@@ -8,12 +8,14 @@ export class AppPage {
   scrollTo(x: number = 0, y: number = 0) {
     browser.executeScript(`return window.scrollTo(${x}, ${y});`);
     return browser.wait(() =>
-      this.getScrollYPosition()
-        .then((posY) => posY === y));
+      this.getScrollYPosition().then(posY => posY === y)
+    );
   }
 
   scrollIntoView(selector: string) {
-    return browser.executeScript(`return document.querySelector('${selector}').scrollIntoView()`);
+    return browser.executeScript(
+      `return document.querySelector('${selector}').scrollIntoView()`
+    );
   }
 
   scrollToImageTopElement() {
@@ -32,14 +34,21 @@ export class AppPage {
   }
 
   setWindowSize(x: number, y: number) {
-    browser.driver.manage().window().setSize(x, y);
+    browser.driver
+      .manage()
+      .window()
+      .setSize(x, y);
     return browser.wait(() =>
-      this.getWindowSize()
-        .then((size: any) => size.height === y && size.width === x));
+      this.getWindowSize().then(
+        (size: any) => size.height === y && size.width === x
+      )
+    );
   }
 
   getWindowSize() {
-    return browser.executeScript(`return { height: window.outerHeight, width: window.outerWidth };`);
+    return browser.executeScript(
+      `return { height: window.outerHeight, width: window.outerWidth };`
+    );
   }
 
   getScrollYPosition() {
@@ -53,7 +62,6 @@ export class AppPage {
   getImageBottomLoaderComp() {
     return element(by.css('.sn-image-loader--bottom'));
   }
-
 
   getImageTopLoaderCompClass() {
     return this.getImageTopLoaderComp().getAttribute('class');
@@ -116,18 +124,21 @@ export class AppPage {
   }
 
   isImageTopLoaded() {
-    return this.getImageTopLoaderCompClass()
-      .then((result: string) => result.includes('sn-image-loaded'));
+    return this.getImageTopLoaderCompClass().then((result: string) =>
+      result.includes('sn-image-loaded')
+    );
   }
 
   isImageBottomLoaded() {
-    return this.getImageBottomLoaderCompClass()
-      .then((result: string) => result.includes('sn-image-loaded'));
+    return this.getImageBottomLoaderCompClass().then((result: string) =>
+      result.includes('sn-image-loaded')
+    );
   }
 
   isVideoLoaded() {
-    return this.getVideoElementClass()
-      .then((result: string) => result.includes('sn-video-loaded'));
+    return this.getVideoElementClass().then((result: string) =>
+      result.includes('sn-video-loaded')
+    );
   }
 
   waitForImageTopElementLoaded() {

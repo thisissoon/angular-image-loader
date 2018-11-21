@@ -1,8 +1,9 @@
-import { AppPage } from './app.po';
 import { browser } from 'protractor';
-import { image } from '../src/app/app-data';
 
-describe('ImageLoader Lib E2E Tests', function () {
+import { AppPage } from './app.po';
+import { image } from '../../src/app/app-data';
+
+describe('ImageLoader Lib E2E Tests', function() {
   let page: AppPage;
 
   beforeEach(() => {
@@ -13,10 +14,11 @@ describe('ImageLoader Lib E2E Tests', function () {
 
   afterEach(() => {
     // ensure no errors appear in console
-    browser.manage()
+    browser
+      .manage()
       .logs()
       .get('browser')
-      .then((browserLog) => {
+      .then(browserLog => {
         expect(browserLog).toEqual([]);
       });
   });
@@ -45,11 +47,12 @@ describe('ImageLoader Lib E2E Tests', function () {
 
       const resultLoaded = page.isImageTopLoaded();
       const resultSrcset = page.getImageTopElementSrcSet();
-      const expectedSrcset = `${image.images[0].x1} 1x, ${image.images[0].x2} 2x`;
+      const expectedSrcset = `${image.images[0].x1} 1x, ${
+        image.images[0].x2
+      } 2x`;
       expect(resultLoaded).toBeTruthy();
       expect(resultSrcset).toEqual(expectedSrcset);
     });
-
   });
 
   describe('lazy load image', () => {
@@ -71,7 +74,6 @@ describe('ImageLoader Lib E2E Tests', function () {
       expectedSrc = image.images[0].x1;
       expect(resultLoaded).toEqual(expectedLoaded);
       expect(resultSrc).toEqual(expectedSrc);
-
     });
 
     it('should update image loaded count element when image scrolled into viewport', () => {
@@ -79,11 +81,9 @@ describe('ImageLoader Lib E2E Tests', function () {
       page.scrollToImageBottomElement();
       expect(page.getImageBottomLoadedCountElementText()).toEqual('1');
     });
-
   });
 
   describe('responsive image', () => {
-
     it('should load correct image for "xs" device size', () => {
       page.setWindowSize(400, 580);
       page.scrollToImageBottomElement();
@@ -91,7 +91,9 @@ describe('ImageLoader Lib E2E Tests', function () {
       const resultLoaded = page.isImageBottomLoaded();
       const expectedLoaded = true;
       const resultSrcset = page.getImageBottomElementSrcSet();
-      const expectedSrcset = `${image.images[0].x1} 1x, ${image.images[0].x2} 2x`;
+      const expectedSrcset = `${image.images[0].x1} 1x, ${
+        image.images[0].x2
+      } 2x`;
 
       expect(resultLoaded).toEqual(expectedLoaded);
       expect(resultSrcset).toEqual(expectedSrcset);
@@ -104,7 +106,9 @@ describe('ImageLoader Lib E2E Tests', function () {
       const resultLoaded = page.isImageBottomLoaded();
       const expectedLoaded = true;
       const resultSrcset = page.getImageBottomElementSrcSet();
-      const expectedSrcset = `${image.images[1].x1} 1x, ${image.images[1].x2} 2x`;
+      const expectedSrcset = `${image.images[1].x1} 1x, ${
+        image.images[1].x2
+      } 2x`;
 
       expect(resultLoaded).toEqual(expectedLoaded);
       expect(resultSrcset).toEqual(expectedSrcset);
@@ -117,7 +121,9 @@ describe('ImageLoader Lib E2E Tests', function () {
       const resultLoaded = page.isImageBottomLoaded();
       const expectedLoaded = true;
       const resultSrcset = page.getImageBottomElementSrcSet();
-      const expectedSrcset = `${image.images[2].x1} 1x, ${image.images[2].x2} 2x`;
+      const expectedSrcset = `${image.images[2].x1} 1x, ${
+        image.images[2].x2
+      } 2x`;
 
       expect(resultLoaded).toEqual(expectedLoaded);
       expect(resultSrcset).toEqual(expectedSrcset);
@@ -146,8 +152,5 @@ describe('ImageLoader Lib E2E Tests', function () {
       expected = '3';
       expect(result).toEqual(expected);
     });
-
   });
-
 });
-
