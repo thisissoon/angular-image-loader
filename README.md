@@ -261,7 +261,7 @@ Run `npm run release` to create a new release. This will use [Standard Version][
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README][angular-cli-readme].
 
-[circle-badge]: https://circleci.com/gh/thisissoon/angular-image-loader.svg?branch=master
+[circle-badge]: https://circleci.com/gh/thisissoon/angular-image-loader.svg?style=shield
 [circle-badge-url]: https://circleci.com/gh/thisissoon/angular-image-loader
 [coveralls-badge]: https://coveralls.io/repos/github/thisissoon/angular-image-loader/badge.svg?branch=master
 [coveralls-badge-url]: https://coveralls.io/github/thisissoon/angular-image-loader?branch=master
