@@ -13,7 +13,7 @@ describe('VideoLoaderComponent', () => {
     TestBed.configureTestingModule({
       imports: [InViewportModule.forRoot()],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [VideoLoaderComponent]
+      declarations: [VideoLoaderComponent],
     }).compileComponents();
   }));
 

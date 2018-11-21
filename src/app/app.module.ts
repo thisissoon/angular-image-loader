@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 
 export const getWindow = () => window;
 export const providers: Provider[] = [
-  { provide: WindowRef, useFactory: getWindow }
+  { provide: WindowRef, useFactory: getWindow },
 ];
 
 @NgModule({
@@ -17,9 +17,9 @@ export const providers: Provider[] = [
     BrowserModule,
     InViewportModule.forRoot(providers),
     ImageLoaderModule,
-    VideoLoaderModule
+    VideoLoaderModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

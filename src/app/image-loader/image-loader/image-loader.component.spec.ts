@@ -15,7 +15,7 @@ describe('ImageLoaderComponent', () => {
   const sizes: Breakpoint[] = [
     { size: 'xs', width: 0 },
     { size: 'md', width: 768 },
-    { size: 'lg', width: 992 }
+    { size: 'lg', width: 992 },
   ];
   let testBed;
 
@@ -26,26 +26,26 @@ describe('ImageLoaderComponent', () => {
       {
         size: 'xs',
         x1: 'http://via.placeholder.com/150x350?text=xs+1x',
-        x2: 'http://via.placeholder.com/300x700?text=xs+2x'
+        x2: 'http://via.placeholder.com/300x700?text=xs+2x',
       },
       {
         size: 'md',
         x1: 'http://via.placeholder.com/350x250?text=md+1x',
-        x2: 'http://via.placeholder.com/700x500?text=md+2x'
+        x2: 'http://via.placeholder.com/700x500?text=md+2x',
       },
       {
         size: 'lg',
         x1: 'http://via.placeholder.com/700x400?text=lg+1x',
-        x2: 'http://via.placeholder.com/1400x800?text=lg+2x'
-      }
-    ]
+        x2: 'http://via.placeholder.com/1400x800?text=lg+2x',
+      },
+    ],
   };
 
   beforeEach(async(() => {
     testBed = TestBed.configureTestingModule({
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
       declarations: [ImageLoaderComponent],
-      imports: [InViewportModule.forRoot()]
+      imports: [InViewportModule.forRoot()],
     });
 
     testBed.compileComponents();
@@ -134,13 +134,13 @@ describe('ImageLoaderComponent', () => {
     component.img.nativeElement = { src: null };
     component.preloadImage();
     expect(component.preloadSrc).toEqual(
-      'http://via.placeholder.com/150x350?text=xs+1x'
+      'http://via.placeholder.com/150x350?text=xs+1x',
     );
 
     component.supportsSrcSet = true;
     component.preloadImage();
     expect(component.preloadSrcset).toEqual(
-      'http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x'
+      'http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x',
     );
   });
 
@@ -152,24 +152,24 @@ describe('ImageLoaderComponent', () => {
     component.img.nativeElement = { src: null };
     component.preloadImage();
     expect(component.preloadSrc).toEqual(
-      'http://via.placeholder.com/150x350?text=xs+1x'
+      'http://via.placeholder.com/150x350?text=xs+1x',
     );
 
     component.onImagePreload();
     expect(component.src).toEqual(
-      'http://via.placeholder.com/150x350?text=xs+1x'
+      'http://via.placeholder.com/150x350?text=xs+1x',
     );
 
     component.supportsSrcSet = true;
     component.loaded = false;
     component.preloadImage();
     expect(component.preloadSrcset).toEqual(
-      'http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x'
+      'http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x',
     );
 
     component.onImagePreload();
     expect(component.srcset).toEqual(
-      'http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x'
+      'http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x',
     );
   });
 
@@ -184,7 +184,7 @@ describe('ImageLoaderComponent', () => {
     expect(spy).toHaveBeenCalledWith({
       $event: event,
       src: component.src,
-      srcset: component.srcset
+      srcset: component.srcset,
     });
   });
 

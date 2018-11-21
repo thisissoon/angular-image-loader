@@ -14,6 +14,6 @@ import { ImageLoaderComponent } from './image-loader/image-loader.component';
 @NgModule({
   imports: [CommonModule, InViewportModule],
   declarations: [ImageLoaderComponent],
-  exports: [ImageLoaderComponent]
+  exports: [ImageLoaderComponent],
 })
 export class ImageLoaderModule {}

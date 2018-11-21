@@ -8,13 +8,13 @@ import {
   OnInit,
   OnDestroy,
   ChangeDetectorRef,
-  ElementRef
+  ElementRef,
 } from '@angular/core';
 import { Subject, fromEvent } from 'rxjs';
 import { takeUntil, debounceTime, startWith } from 'rxjs/operators';
 import { WindowRef, InViewportDirective } from '@thisissoon/angular-inviewport';
 
-import { ResponsiveImage, Size } from '../../image-loader/shared/image.model';
+import { Size } from '../../image-loader/shared/image.model';
 import { Breakpoint } from '../../image-loader/shared/breakpoint.model';
 import { ResponsiveVideo } from '../shared/video.model';
 import * as classes from '../shared/classes';
@@ -43,7 +43,7 @@ import { ImageLoadedEvent } from '../../image-loader/shared/image-loaded-event.m
 @Component({
   selector: 'sn-video-loader',
   templateUrl: './video-loader.component.html',
-  styleUrls: ['./video-loader.component.scss']
+  styleUrls: ['./video-loader.component.scss'],
 })
 export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
@@ -117,7 +117,7 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
     { size: 'sm', width: 576 },
     { size: 'md', width: 768 },
     { size: 'lg', width: 992 },
-    { size: 'xl', width: 1200 }
+    { size: 'xl', width: 1200 },
   ];
   /**
    * Current size of video to display
@@ -190,7 +190,7 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private windowRef: WindowRef,
     private ngZone: NgZone,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
   ) {}
   /**
    * Set poster before component renders to resolve an issue
@@ -216,10 +216,10 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
         .pipe(
           takeUntil(this.ngUnsubscribe$),
           debounceTime(this.debounce),
-          startWith({ target: { innerWidth: this.windowRef.innerWidth } })
+          startWith({ target: { innerWidth: this.windowRef.innerWidth } }),
         )
         .subscribe((event: any) =>
-          this.ngZone.run(() => this.onWidthChange(event.target.innerWidth))
+          this.ngZone.run(() => this.onWidthChange(event.target.innerWidth)),
         );
     });
   }

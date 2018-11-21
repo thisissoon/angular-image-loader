@@ -10,7 +10,7 @@ import {
   ViewChild,
   ElementRef,
   NgZone,
-  OnChanges
+  OnChanges,
 } from '@angular/core';
 import { Subject, fromEvent } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
@@ -42,7 +42,7 @@ import { ResponsiveImage, Size } from '../shared/image.model';
 @Component({
   selector: 'sn-image-loader',
   templateUrl: './image-loader.component.html',
-  styleUrls: ['./image-loader.component.scss']
+  styleUrls: ['./image-loader.component.scss'],
 })
 export class ImageLoaderComponent
   implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -87,7 +87,7 @@ export class ImageLoaderComponent
     { size: 'sm', width: 576 },
     { size: 'md', width: 768 },
     { size: 'lg', width: 992 },
-    { size: 'xl', width: 1200 }
+    { size: 'xl', width: 1200 },
   ];
   /**
    * Current size of image to display
@@ -200,10 +200,10 @@ export class ImageLoaderComponent
       fromEvent(this.windowRef as any, events.eventResize)
         .pipe(
           takeUntil(this.ngUnsubscribe$),
-          debounceTime(this.debounce)
+          debounceTime(this.debounce),
         )
         .subscribe((event: any) =>
-          this.ngZone.run(() => this.onWidthChange(event.target.innerWidth))
+          this.ngZone.run(() => this.onWidthChange(event.target.innerWidth)),
         );
     });
   }
@@ -256,7 +256,7 @@ export class ImageLoaderComponent
   public preloadImage(): void {
     if (this.inViewport && this.notLoaded) {
       const retinaImg = this.image.images.find(
-        retinaImage => retinaImage.size === this.size
+        retinaImage => retinaImage.size === this.size,
       );
       const imageNormal = retinaImg.x1;
       const imageRetina = retinaImg.x2;
@@ -275,7 +275,7 @@ export class ImageLoaderComponent
    */
   public onImagePreload(): void {
     const retinaImg = this.image.images.find(
-      retinaImage => retinaImage.size === this.size
+      retinaImage => retinaImage.size === this.size,
     );
     const imageNormal = retinaImg.x1;
     const imageRetina = retinaImg.x2;
@@ -307,7 +307,7 @@ export class ImageLoaderComponent
     const eventData = {
       $event,
       src: this.src,
-      srcset: this.srcset
+      srcset: this.srcset,
     };
     if (!this.loaded) {
       this.placeholderLoaded.emit(eventData);

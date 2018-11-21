@@ -36,19 +36,16 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "npm run format:check && npm run lint:ts && npm run lint:scss",
     "e2e": "ng e2e",
+    "lint": "npm run stylelint && npm run nglint && npm run prettier",
+    "lint:fix": "npm run stylelint -- --fix && npm run nglint -- --fix && npm run prettier -- --write",
+    "nglint": "ng lint",
+    "stylelint": "stylelint --syntax scss \"src/**/*.{css,scss}\"",
+    "prettier": "prettier --config .prettierrc -l \"src/**/*.{ts,js,json,css,scss}\"",
     "coverage": "coveralls < coverage/lcov.info",
     "packagr": "ng-packagr -p package.json",
     "release": "standard-version",
-    "postrelease": "npm run packagr",
-    "lint:ts": "ng lint",
-    "lint:ts:fix": "ng lint angular-image-loader --fix && ng lint angular-image-loader-e2e --fix",
-    "lint:scss": "stylelint --syntax scss \"src/**/*.scss\"",
-    "format:check": "prettier --config ./.prettierrc -l \"{src/{app,environments,assets}/**/*.{ts,json,css,scss},./*.{ts,js,json,css,scss}}\"",
-    "format:fix:staged": "pretty-quick --staged",
-    "format:fix:all": "npm run format:check -- --write && npm run lint:scss -- --fix && npm run lint:ts:fix",
-    "precommit": "npm run format:fix:staged && npm run lint"
+    "postrelease": "npm run packagr"
   },
   "private": false,
   "dependencies": {},
@@ -97,15 +94,17 @@
     "tslint": "~5.7.0",
     "typescript": "~2.7.2",
     "zone.js": "^0.8.26",
-    "husky": "^0.14.3",
-    "prettier": "^1.11.1",
-    "pretty-quick": "^1.4.1",
-    "stylelint": "^9.2.0",
-    "stylelint-order": "^0.8.1",
+    "husky": "^1.1.0",
+    "prettier": "^1.14.3",
+    "stylelint": "^9.6.0",
+    "stylelint-order": "^1.0.0",
     "stylelint-config-recommended-scss": "^3.2.0",
     "stylelint-config-standard": "^18.2.0",
-    "stylelint-scss": "^3.0.0",
-    "karma-mocha-reporter": "^2.2.5"
+    "stylelint-scss": "^3.3.1",
+    "karma-mocha-reporter": "^2.2.5",
+    "lint-staged": "^7.3.0",
+    "stylelint-config-prettier": "^4.0.0",
+    "tslint-config-prettier": "^1.15.0"
   },
   "config": {
     "commitizen": {
@@ -120,5 +119,24 @@
         "@thisissoon/angular-inviewport": "angularInViewport"
       }
     }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "tslint --fix",
+      "git add"
+    ],
+    "src/**/*.{css,scss}": [
+      "stylelint --syntax scss --fix",
+      "git add"
+    ],
+    "src/**/*.{ts,js,json,css,scss}": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ]
   }
 }

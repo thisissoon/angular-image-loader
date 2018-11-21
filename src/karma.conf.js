@@ -11,18 +11,18 @@ module.exports = function(config) {
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular-devkit/build-angular/plugins/karma'),
-      require('karma-mocha-reporter')
+      require('karma-mocha-reporter'),
     ],
     client: {
-      clearContext: false // leave Jasmine Spec Runner output visible in browser
+      clearContext: false, // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, '..', 'coverage'),
       reports: ['html', 'lcovonly', 'text-summary'],
-      fixWebpackSourcePaths: true
+      fixWebpackSourcePaths: true,
     },
     angularCli: {
-      environment: 'dev'
+      environment: 'dev',
     },
     reporters:
       config.angularCli && config.angularCli.codeCoverage
@@ -33,6 +33,6 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['ChromeHeadless'],
-    singleRun: false
+    singleRun: false,
   });
 };
