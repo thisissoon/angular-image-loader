@@ -11,10 +11,11 @@ import {
   ElementRef,
   NgZone,
   OnChanges,
+  Inject,
 } from '@angular/core';
 import { Subject, fromEvent } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
-import { WindowRef, InViewportDirective } from '@thisissoon/angular-inviewport';
+import { InViewportDirective, WINDOW } from '@thisissoon/angular-inviewport';
 
 import * as classes from '../shared/classes';
 import * as events from '../shared/events';
@@ -178,14 +179,14 @@ export class ImageLoaderComponent
    *
    * @memberof ImageLoaderComponent
    */
-  constructor(private windowRef: WindowRef, private ngZone: NgZone) {}
+  constructor(@Inject(WINDOW) private window: Window, private ngZone: NgZone) {}
   /**
    * Set placeholder image as image on component init
    *
    * @memberof ImageLoaderComponent
    */
   public ngOnInit(): void {
-    this.onWidthChange(this.windowRef.innerWidth);
+    this.onWidthChange(this.window.innerWidth);
     this.setPlaceholder();
   }
   /**
@@ -197,7 +198,7 @@ export class ImageLoaderComponent
   public ngAfterViewInit(): void {
     // Listen for window scroll/resize events.
     this.ngZone.runOutsideAngular(() => {
-      fromEvent(this.windowRef as any, events.eventResize)
+      fromEvent(this.window, events.eventResize)
         .pipe(
           takeUntil(this.ngUnsubscribe$),
           debounceTime(this.debounce),
@@ -206,12 +207,6 @@ export class ImageLoaderComponent
           this.ngZone.run(() => this.onWidthChange(event.target.innerWidth)),
         );
     });
-  }
-  /**
-   * Checks if image element is in viewport
-   */
-  public checkInViewportStatus(): void {
-    this.snInViewport.calculateInViewportStatus();
   }
   /**
    * If element is in viewport preload image by setting the src

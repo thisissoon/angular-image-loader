@@ -9,10 +9,11 @@ import {
   OnDestroy,
   ChangeDetectorRef,
   ElementRef,
+  Inject,
 } from '@angular/core';
 import { Subject, fromEvent } from 'rxjs';
 import { takeUntil, debounceTime, startWith } from 'rxjs/operators';
-import { WindowRef, InViewportDirective } from '@thisissoon/angular-inviewport';
+import { WINDOW, InViewportDirective } from '@thisissoon/angular-inviewport';
 
 import { Size } from '../../image-loader/shared/image.model';
 import { Breakpoint } from '../../image-loader/shared/breakpoint.model';
@@ -188,7 +189,7 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * @memberof VideoLoaderComponent
    */
   constructor(
-    private windowRef: WindowRef,
+    @Inject(WINDOW) private window: Window,
     private ngZone: NgZone,
     private cdRef: ChangeDetectorRef,
   ) {}
@@ -212,11 +213,11 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
   public ngAfterViewInit(): void {
     // Listen for window scroll/resize events.
     this.ngZone.runOutsideAngular(() => {
-      fromEvent(this.windowRef as any, events.eventResize)
+      fromEvent(this.window, events.eventResize)
         .pipe(
           takeUntil(this.ngUnsubscribe$),
           debounceTime(this.debounce),
-          startWith({ target: { innerWidth: this.windowRef.innerWidth } }),
+          startWith({ target: { innerWidth: this.window.innerWidth } }),
         )
         .subscribe((event: any) =>
           this.ngZone.run(() => this.onWidthChange(event.target.innerWidth)),
@@ -232,14 +233,6 @@ export class VideoLoaderComponent implements OnInit, AfterViewInit, OnDestroy {
   public onInViewportChange(inViewport: boolean): void {
     this.inViewport = inViewport;
     this.loadVideo();
-  }
-  /**
-   * Checks if video element is in viewport
-   *
-   * @memberof VideoLoaderComponent
-   */
-  public checkInViewportStatus(): void {
-    this.snInViewport.calculateInViewportStatus();
   }
   /**
    * On width change, determine if device has changed and

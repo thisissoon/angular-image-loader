@@ -7,7 +7,6 @@ import { InViewportModule } from '@thisissoon/angular-inviewport';
 import { ImageLoaderComponent } from './image-loader.component';
 import { ResponsiveImage } from '../shared/image.model';
 import { Breakpoint } from '../shared/breakpoint.model';
-import { ImageLoadedEvent } from '../shared/image-loaded-event.model';
 
 describe('ImageLoaderComponent', () => {
   let fixture: ComponentFixture<ImageLoaderComponent>;
@@ -45,7 +44,7 @@ describe('ImageLoaderComponent', () => {
     testBed = TestBed.configureTestingModule({
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
       declarations: [ImageLoaderComponent],
-      imports: [InViewportModule.forRoot()],
+      imports: [InViewportModule.forServer()],
     });
 
     testBed.compileComponents();
@@ -207,12 +206,6 @@ describe('ImageLoaderComponent', () => {
     component.preloadSrcset = '';
     component.onImagePreloadError();
     expect(component.src).toEqual('');
-  });
-
-  it('should check inviewport status', () => {
-    const spy = spyOn(component.snInViewport, 'calculateInViewportStatus');
-    component.checkInViewportStatus();
-    expect(spy).toHaveBeenCalled();
   });
 
   it('should set placeholder on changes', () => {

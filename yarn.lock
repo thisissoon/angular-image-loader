@@ -418,10 +418,10 @@
     semver "5.5.1"
     semver-intersect "1.4.0"
 
-"@thisissoon/angular-inviewport@^3.0.0":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@thisissoon/angular-inviewport/-/angular-inviewport-3.0.1.tgz#3f17ab5f25d694a0bdb7b0c7506e948fc6a99a30"
-  integrity sha512-twIb1S+K7EOffgZ6o6zGJVKdHl9kHqoA7bljN1scRv6OzlLj7M7tmVTmqAOePb+Ue+xMhCiaZ56sKyNySqArAA==
+"@thisissoon/angular-inviewport@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@thisissoon/angular-inviewport/-/angular-inviewport-4.1.0.tgz#b37507e7b227a3e3239ba62749dfcd44fc95fc1f"
+  integrity sha512-27rbbIlhDc814za5Tvnjrshckje6hu9+cl1unpAb60LgyP8QjPf3kHjOuFRfqhHUREUXPWmbaQMVE+3caOEjrA==
   dependencies:
     tslib "^1.9.0"
 

@@ -11,7 +11,7 @@ describe('VideoLoaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [InViewportModule.forRoot()],
+      imports: [InViewportModule.forServer()],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
       declarations: [VideoLoaderComponent],
     }).compileComponents();
@@ -97,11 +97,5 @@ describe('VideoLoaderComponent', () => {
     component.poster = '';
     component.onImageLoad(event as any);
     expect(component.poster).toEqual('foo');
-  });
-
-  it('should check inviewport status', () => {
-    const spy = spyOn(component.snInViewport, 'calculateInViewportStatus');
-    component.checkInViewportStatus();
-    expect(spy).toHaveBeenCalled();
   });
 });

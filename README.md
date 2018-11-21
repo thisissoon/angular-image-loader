@@ -28,16 +28,11 @@ import {
   ImageLoaderModule,
   VideoLoaderModule,
 } from '@thisissoon/angular-image-loader';
-import { InViewportModule, WindowRef } from '@thisissoon/angular-inviewport';
-
-// Provide window object for platform browser
-export const providers: Provider[] = [
-  { provide: WindowRef, useFactory: () => window },
-];
+import { InViewportModule } from '@thisissoon/angular-inviewport';
 
 @NgModule({
   imports: [
-    InViewportModule.forRoot(providers),
+    InViewportModule,
     ImageLoaderModule, // Only this import required if using just the image loader
     VideoLoaderModule, // Only this import required if using just the video loader
   ],
@@ -52,12 +47,7 @@ import { ImageLoaderModule } from '@thisissoon/angular-image-loader';
 import { InViewportModule, WindowRef } from '@thisissoon/angular-inviewport';
 
 @NgModule({
-  imports: [
-    // No need to provide WindowRef
-    InViewportModule.forRoot(),
-    ImageLoaderModule,
-    VideoLoaderModule,
-  ],
+  imports: [InViewportModule.forServer(), ImageLoaderModule, VideoLoaderModule],
 })
 export class AppModule {}
 ```
@@ -134,23 +124,8 @@ export class AppComponent {
 }
 
 .sn-image-loaded ::ng-deep .img {
-  filter: blur(0px);
+  filter: blur(0);
 }
-```
-
-### Check inviewport status manually
-
-```html
-<sn-image-loader
-  [image]="image"
-  [sizes]="sizes"
-  imgClass="img"
-  alt="lorem ipsum"
-  #imgEl
->
-</sn-image-loader>
-
-<button (click)="imgEl.checkInViewportStatus()">Check status</button>
 ```
 
 ## Video Loader Example
@@ -206,27 +181,6 @@ export class AppComponent {
     },
   };
 }
-```
-
-### Check inviewport status manually
-
-```html
-<sn-video-loader
-  [sizes]="sizes"
-  [video]="video"
-  [loop]="true"
-  [muted]="true"
-  [autoplay]="true"
-  [controls]="true"
-  [playsInline]="true"
-  type="video/mp4"
-  videoClass="video"
-  posterClass="img"
-  #videoEl
->
-</sn-video-loader>
-
-<button (click)="videoEl.checkInViewportStatus()">Check status</button>
 ```
 
 ## Development server
