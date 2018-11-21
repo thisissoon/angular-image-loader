@@ -8,25 +8,25 @@ jobs:
   setup:
     working_directory: ~/@thisissoon/angular-image-loader
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:10-browsers
     steps:
       - checkout
       - restore_cache:
-          key: ~/@thisissoon/angular-image-loader-{{ .Branch }}-{{ checksum "package.json" }}
+          key: ~/angular-image-loader-{{ .Branch }}-{{ checksum "package.json" }}
       - run: yarn --silent
       - save_cache:
-          key: ~/@thisissoon/angular-image-loader-{{ .Branch }}-{{ checksum "package.json" }}
+          key: ~/angular-image-loader-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - 'node_modules'
 
   test:
     working_directory: ~/@thisissoon/angular-image-loader
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:10-browsers
     steps:
       - checkout
       - restore_cache:
-          key: ~/@thisissoon/angular-image-loader-{{ .Branch }}-{{ checksum "package.json" }}
+          key: ~/angular-image-loader-{{ .Branch }}-{{ checksum "package.json" }}
       - run: yarn lint
       - run: yarn test --configuration ci
       - run: yarn e2e
