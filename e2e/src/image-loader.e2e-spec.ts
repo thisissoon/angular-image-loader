@@ -134,6 +134,7 @@ describe('ImageLoader Lib E2E Tests', function() {
       let expected = '0';
       expect(result).toEqual(expected);
 
+      page.scrollTo();
       page.setWindowSize(400, 580);
       page.scrollToImageBottomElement();
       result = page.getImageBottomLoadedCountElementText();
