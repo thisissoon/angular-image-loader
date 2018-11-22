@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/thisissoon/angular-image-loader/compare/v4.0.0...v5.0.0) (2018-11-22)
+
+
+### Features
+
+* **image-loader:** update to angular-inviewport 4 ([391e4b1](https://github.com/thisissoon/angular-image-loader/commit/391e4b1))
+* **image-loader:** update to support angular 7 ([7faac32](https://github.com/thisissoon/angular-image-loader/commit/7faac32))
+
+
+### BREAKING CHANGES
+
+* **image-loader:** Updated to @thisissoon/angular-inviewport v4 which removes the need to manually
+check inviewport status
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/thisissoon/angular-image-loader/compare/v3.3.2...v4.0.0) (2018-05-23)
 
