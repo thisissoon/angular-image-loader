@@ -38,7 +38,7 @@ import { ResponsiveImage, Size } from '../shared/image.model';
  *   alt="lorem ipsum">
  * </sn-image-loader>
  * ```
- *
+ * @dynamic
  */
 @Component({
   selector: 'sn-image-loader',

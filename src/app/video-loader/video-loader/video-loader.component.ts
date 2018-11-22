@@ -40,6 +40,8 @@ import { ImageLoadedEvent } from '../../image-loader/shared/image-loaded-event.m
  *   posterClass="img">
  * </sn-video-loader>
  * ```
+ *
+ * @dynamic
  */
 @Component({
   selector: 'sn-video-loader',
