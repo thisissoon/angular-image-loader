@@ -250,16 +250,18 @@ export class ImageLoaderComponent
    */
   public preloadImage(): void {
     if (this.inViewport && this.notLoaded) {
-      const retinaImg = this.image.images.find(
-        retinaImage => retinaImage.size === this.size,
-      );
-      const imageNormal = retinaImg.x1;
-      const imageRetina = retinaImg.x2;
-      if ('srcset' in this.img.nativeElement) {
-        this.supportsSrcSet = true;
+      const retinaImg =
+        this.image.images &&
+        this.image.images.find(retinaImage => retinaImage.size === this.size);
+      if (retinaImg) {
+        const imageNormal = retinaImg.x1;
+        const imageRetina = retinaImg.x2;
+        if ('srcset' in this.img.nativeElement) {
+          this.supportsSrcSet = true;
+        }
+        this.preloadSrcset = `${imageNormal} 1x, ${imageRetina} 2x`;
+        this.preloadSrc = imageNormal;
       }
-      this.preloadSrcset = `${imageNormal} 1x, ${imageRetina} 2x`;
-      this.preloadSrc = imageNormal;
     }
   }
   /**
