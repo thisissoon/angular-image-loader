@@ -219,4 +219,45 @@ describe('ImageLoaderComponent', () => {
     component.ngOnChanges();
     expect(spy).toHaveBeenCalled();
   });
+
+  describe('async image', () => {
+    let spyPreloadImage, spySetPlaceholder;
+
+    beforeEach(() => {
+      spyPreloadImage = spyOn(component, 'preloadImage').and.callThrough();
+      spySetPlaceholder = spyOn(component, 'setPlaceholder').and.callThrough();
+
+      component.image = {
+        placeholder: 'someplaceholder',
+        images: null,
+        fallback: null,
+      };
+      component.inViewport = true;
+      component.loaded = false;
+    });
+
+    it('should not preload image if no images are set and is in viewport', () => {
+      component.ngOnChanges();
+      expect(spyPreloadImage).toHaveBeenCalled();
+      expect(spySetPlaceholder).toHaveBeenCalled();
+      expect(component.preloadSrc).toEqual('');
+      expect(component.preloadSrcset).toEqual('');
+    });
+
+    it('should preload image after already scrolled in and set later on', () => {
+      component.ngOnChanges();
+      expect(component.preloadSrc).toEqual('');
+      expect(component.preloadSrcset).toEqual('');
+      expect(component.src).toEqual('someplaceholder');
+
+      component.image = image;
+      component.ngOnChanges();
+      expect(component.preloadSrc).toEqual(
+        'http://via.placeholder.com/150x350?text=xs+1x',
+      );
+      expect(component.preloadSrcset).toEqual(
+        'http://via.placeholder.com/150x350?text=xs+1x 1x, http://via.placeholder.com/300x700?text=xs+2x 2x',
+      );
+    });
+  });
 });

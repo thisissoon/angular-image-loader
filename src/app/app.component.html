@@ -23,6 +23,22 @@
   #imgEl>
 </sn-image-loader>
 <h3>Bottom image imageLoaded event count: <span class="image-loaded-count">{{ imageLoadedEventCount }}</span></h3>
+
+<h1>Scroll down for async image</h1>
+<h3>Async image placeholder loaded: <span class="placeholder-loaded">{{ placeholderAsyncImageLoaded }}</span></h3>
+<div class="spacer"></div>
+
+<h3>Async image data after 3 seconds (placeholder immediately)</h3><button (click)="startAsyncLoading()">Start timer</button>
+<sn-image-loader
+  [image]="asyncImage"
+  [sizes]="sizes"
+  imgClass="img img--bottom"
+  alt="lorem ipsum"
+  (placeholderLoaded)="onAsyncImagePlaceholderLoad($event)"
+  (imageLoaded)="onAsyncImageLoad($event)"
+  class="sn-image-loader sn-image-loader--bottom">
+</sn-image-loader>
+<h3>Async image imageLoaded event count: <span class="image-loaded-count">{{ asyncImageLoadedEventCount }}</span></h3>
 <div class="spacer"></div>
 
 <sn-video-loader
