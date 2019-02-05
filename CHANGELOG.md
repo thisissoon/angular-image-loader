@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/thisissoon/angular-image-loader/compare/v5.0.0...v5.1.0) (2019-02-05)
+
+
+### Features
+
+* **image-loader:** Set image asynchronously and placeholder immediately ([d5ab91f](https://github.com/thisissoon/angular-image-loader/commit/d5ab91f))
+
+
+
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/thisissoon/angular-image-loader/compare/v4.0.0...v5.0.0) (2018-11-22)
 
